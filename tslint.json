@@ -6,7 +6,7 @@
     ]
   },
   "rules": {
-    "no-unused-variable": true,
+    "no-unused-variable": false,
     "no-empty-interface": false,
     "ordered-imports": false
   },
