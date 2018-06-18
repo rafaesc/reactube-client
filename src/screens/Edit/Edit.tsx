@@ -52,6 +52,7 @@ class Edit extends React.Component<IProps> {
     if (id) {
       index = findIndexPlaylistForId(playlist, id);
     }
+    const existsIndex = index !== undefined;
 
     return (
       <PageStyled>
@@ -61,7 +62,7 @@ class Edit extends React.Component<IProps> {
               {id ? "Edit video" : "Add to playlist"}
             </TitlePageStyled>
             <EditForm
-              playlist={index ? playlist[index] : undefined}
+              playlist={existsIndex ? playlist[index] : undefined}
               history={history}
               onSuccess={this.handleSuccess}
             />
