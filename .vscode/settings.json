@@ -1,0 +1,10 @@
+{
+  "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true,
+  "javascript.validate.enable": false,
+  "editor.rulers": [80],
+  "html.format.endWithNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.trimAutoWhitespace": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}
