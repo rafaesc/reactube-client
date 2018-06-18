@@ -44,4 +44,4 @@ npm run start
 
 MIT License
 
-Copyright (c) 2017-present, [Rafael Escala](https://github.com/rafaesc)
+Copyright (c) 2018-present, [Rafael Escala](https://github.com/rafaesc)
