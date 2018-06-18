@@ -15,7 +15,8 @@ import {
   validImageURL,
   validTime,
   validVideoURL,
-  getTime
+  getTime,
+  parseFormtoPlaylist
 } from "./utils";
 import { formatTime } from "../../utils";
 import { History } from "history";
@@ -158,15 +159,11 @@ export default class EditForm extends React.Component<IProps> {
     this.validForm(() => {
       const isThereErrors = Object.keys(this.state.errors).length;
       if (!isThereErrors) {
-        // tslint:disable-next-line:no-console
-        console.log("Exito", this.state.form);
+        this.setState({
+          success: true
+        });
+        this.props.onSuccess(parseFormtoPlaylist(this.state.form));
       }
-      /*
-      this.setState({
-        success: true
-      });
-      this.props.onSuccess(parseFormtoPlaylist(this.state.form));
-      */
     });
   };
 
