@@ -1,6 +1,7 @@
 {
-  "name": "video-player",
+  "name": "reactube",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "rc-slider": "^8.6.1",
