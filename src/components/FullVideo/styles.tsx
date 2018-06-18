@@ -57,6 +57,7 @@ left: 0;
 right: 0;
 bottom: 0;
 width: 100%;
+cursor: auto;
 `;
 
 export const ControlBarStyled = div`

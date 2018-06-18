@@ -23,11 +23,11 @@ export default class Shortcut extends React.Component<IProps> {
         keyCode: 32 // spacebar
       },
       {
-        handle: this.leftArrow,
+        handle: this.rightArrow,
         keyCode: 37 // Left arrow
       },
       {
-        handle: this.rightArrow,
+        handle: this.leftArrow,
         keyCode: 39 // Right arrow
       },
       {
