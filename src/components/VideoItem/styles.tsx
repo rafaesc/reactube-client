@@ -29,7 +29,7 @@ height: 118px;
 background-color: black;
 background-image: url(${({ image }) => image});
 background-size: cover;
-
+background-position: center;
 `;
 
 export const VideoItemBottom = div`

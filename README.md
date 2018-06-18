@@ -1,4 +1,4 @@
-#Reactube
+# Reactube-client
 
 ````
 # install dependencies

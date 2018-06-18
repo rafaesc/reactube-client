@@ -68,6 +68,23 @@ export function formatTime(secondsParam = 0, guide = secondsParam) {
   return hours + minutes + seconds;
 }
 
+export const arrayShuffle = array => {
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
+
 export function setStorage(key, value) {
   if (key && typeof value !== "undefined") {
     window.localStorage[key] = JSON.stringify(value);
@@ -78,6 +95,17 @@ export function getStorage(key) {
   const value = window.localStorage[key];
 
   return value ? JSON.parse(value) : undefined;
+}
+
+export function cleanDeprecatedStorage(name, version) {
+  Object.keys(window.localStorage)
+    .filter(
+      keyStore =>
+        keyStore.indexOf(name) > -1 && keyStore.indexOf(version) === -1
+    )
+    .forEach((key: any) => {
+      delete window.localStorage[key];
+    });
 }
 
 export function copy(ob: any) {

@@ -6,7 +6,8 @@ import {
   ItemButtonsContainStyled,
   ItemLeftIndexStyled,
   ItemTitleStyled,
-  ItemTagsStyled
+  ItemTagsStyled,
+  ItemImageStyled
 } from "./styles";
 
 interface IProps extends IPlaylistItem {
@@ -28,24 +29,28 @@ const Item: React.SFC<IProps> = ({
   selected,
   onClick
 }) => (
-    <ItemStyled>
-      <ItemContainStyled onClick={onClick ? onClick.bind(null, id) : null}>
-        {!expand && <ItemLeftIndexStyled>
-          {selected && selected === id ? <i className="fas fa-play" /> : index + 1}
-        </ItemLeftIndexStyled>}
-        <div>
-          <img src={image} width="120px" />
-        </div>
-        <ItemTitleStyled>
-          <h3>{title}</h3>
-          <ItemTagsStyled>
-            {tags.length ? <i className="fas fa-tags" /> : null}
-            {tags.map((tag, tagIndex) => <span key={tagIndex}>{tag}</span>)}
-          </ItemTagsStyled>
-        </ItemTitleStyled>
-      </ItemContainStyled>
-      <ItemButtonsContainStyled>{children}</ItemButtonsContainStyled>
-    </ItemStyled>
-  );
+  <ItemStyled>
+    <ItemContainStyled onClick={onClick ? onClick.bind(null, id) : null}>
+      {!expand && (
+        <ItemLeftIndexStyled>
+          {selected && selected === id ? (
+            <i className="fas fa-play" />
+          ) : (
+            index + 1
+          )}
+        </ItemLeftIndexStyled>
+      )}
+      <ItemImageStyled image={image} />
+      <ItemTitleStyled>
+        <h3>{title}</h3>
+        <ItemTagsStyled>
+          {tags.length ? <i className="fas fa-tags" /> : null}
+          {tags.map((tag, tagIndex) => <span key={tagIndex}>{tag}</span>)}
+        </ItemTagsStyled>
+      </ItemTitleStyled>
+    </ItemContainStyled>
+    <ItemButtonsContainStyled>{children}</ItemButtonsContainStyled>
+  </ItemStyled>
+);
 
 export default Item;

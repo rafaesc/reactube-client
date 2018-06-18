@@ -14,10 +14,11 @@ const button: StyledFunction<IDivStyled & React.HTMLProps<HTMLInputElement>> =
 export const PlaylistWrapper = div`
   width: 100%;
   display: inline-block;
-  background-color: ${({ expand }) => expand ? theme.backgroundColor : theme.grayLightColor};
+  background-color: ${({ expand }) =>
+    expand ? theme.backgroundColor : theme.grayLightColor};
 
   @media ${device.laptopS} {
-    width: ${({ expand }) => expand ? "700px" : "500px"};
+    width: ${({ expand }) => (expand ? "700px" : "500px")};
   }
 `;
 
@@ -68,7 +69,7 @@ span {
 
 export const PlaylistHeadButtonStyled = button`
 color: ${({ active }) =>
-    active ? theme.activeColor : theme.darkColor} !important;
+  active ? theme.activeColor : theme.darkColor} !important;
 `;
 
 export const PlaylistBodyStyled = div`
@@ -80,7 +81,7 @@ overflow-y: auto;
     height: auto;
   }
   @media ${device.laptop} {
-    height: ${({ expand }) => expand ? "auto" : "427px"};
+    height: ${({ expand }) => (expand ? "auto" : "427px")};
   }
 `;
 
@@ -89,11 +90,20 @@ display: flex;
 margin-bottom: 5px;
 `;
 
+export const ItemImageStyled = div`
+width: 120px;
+height: 77px;
+background-color: black;
+background-image: url(${({ image }) => image});
+background-size: cover;
+background-position: center;
+`;
+
 export const ItemContainStyled = div`
 display: flex;
 flex: 1;
 align-items: center;
-cursor: ${(props) => props.onClick ? 'pointer' : 'auto'};
+cursor: ${props => (props.onClick ? "pointer" : "auto")};
 `;
 
 export const ItemButtonsContainStyled = div`
@@ -117,6 +127,17 @@ button {
 
 export const ItemTitleStyled = div`
 padding-left: 10px;
+font-weight: bold;
+font-size: 14px;
+white-space: normal;
+height: 38px;
+line-height: 1rem;
+width: 211px;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
 h3 {
   margin-top: 5px;
   margin-bottom: 10px;

@@ -1,9 +1,20 @@
 import * as React from "react";
 import { IPlaylistItem, IPlaylistItemOptional } from "./components";
-import { findIndexPlaylistForId, copy, getStorage, setStorage } from "./utils";
+import {
+  findIndexPlaylistForId,
+  copy,
+  getStorage,
+  setStorage,
+  cleanDeprecatedStorage,
+  arrayShuffle
+} from "./utils";
 import db from "./db";
 
-const KEY_LOCALSTORAGE = "dbYoutubeReact";
+const NAME_LOCALSTORAGE = "dbYoutubeReact";
+const VERSION_LOCALSTORAGE = "1";
+
+const KEY_LOCALSTORAGE = NAME_LOCALSTORAGE + VERSION_LOCALSTORAGE;
+
 const Context = React.createContext({});
 
 export interface IState {
@@ -24,11 +35,13 @@ export default class LocalStorageProvider extends React.Component<any, IState> {
     super(props);
 
     let playlist: IPlaylistItem[];
+
     const cachePlaylist = getStorage(KEY_LOCALSTORAGE);
+    cleanDeprecatedStorage(NAME_LOCALSTORAGE, VERSION_LOCALSTORAGE);
     if (cachePlaylist) {
       playlist = cachePlaylist;
     } else {
-      playlist = copy(db);
+      playlist = copy(arrayShuffle(db));
       setStorage(KEY_LOCALSTORAGE, playlist);
     }
     this.state = {
@@ -39,7 +52,7 @@ export default class LocalStorageProvider extends React.Component<any, IState> {
   public resetDatabase = () => {
     this.setState(
       {
-        playlist: copy(db)
+        playlist: copy(arrayShuffle(db))
       },
       this.updateStorage
     );
