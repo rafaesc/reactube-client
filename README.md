@@ -1,5 +1,7 @@
-# Reactube-client
-**reactube-client** is a simple web-based on video playlist written in React and Typescript.
+<div style="text-align:center"><img src="./screenshots/reactube.svg" alt="drawing" width="450px"/></div>
+<br>
+
+**Reactube-client** is a simple web-based on video playlist written in React and Typescript.
 
 [Live demo](http://rafaelescala.com/reactube/)
 
