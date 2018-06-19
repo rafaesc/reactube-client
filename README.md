@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div style="text-align:center"><img src="./screenshots/reactube.svg" alt="drawing" width="450px"/></div>
 <br>
 
