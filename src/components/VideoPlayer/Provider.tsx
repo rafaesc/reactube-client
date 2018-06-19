@@ -31,7 +31,7 @@ export default class VideoPlayerProvider extends React.Component<any, IState> {
       state = cacheState;
     } else {
       state = {
-        autoPlaylist: false,
+        autoPlaylist: true,
         playlistItem: null,
         repeat: false,
         theaterMode: false

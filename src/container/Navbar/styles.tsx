@@ -42,6 +42,10 @@ background: #ffffff;
 }
 ${InputLabelGeneralStyled} {
   margin: 0;
+  @media ${device.laptop} {
+    overflow: hidden;
+    border-radius: 2px;
+  }
   input {
     margin: 0;
     font-size: 16px;
@@ -190,5 +194,6 @@ padding: 0px;
   border-color: transparent;
   background-color: transparent;
   color: white;
+  width: 43px;
 }
 `;
