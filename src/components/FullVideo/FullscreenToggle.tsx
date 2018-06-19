@@ -8,22 +8,23 @@ interface IProps extends IPropsFromFullVideo {
   video: Video;
 }
 
-export default class PlayToggle extends React.Component<IProps> {
-  public handleClick = () => {
-    const { toggleFullscreen, video } = this.props;
+const PlayToggle: React.SFC<IProps> = props => {
+  const handleClick = () => {
+    const { toggleFullscreen, video } = props;
     toggleFullscreen(video);
   };
-  public render() {
-    const { fullscreen } = this.props.provider;
 
-    return (
-      <PlayerButtonStyled tabIndex={0} onClick={this.handleClick}>
-        {fullscreen ? (
-          <i className="fas fa-compress" />
-        ) : (
-          <i className="fas fa-expand" />
-        )}
-      </PlayerButtonStyled>
-    );
-  }
-}
+  const { fullscreen } = props.provider;
+
+  return (
+    <PlayerButtonStyled tabIndex={0} onClick={handleClick}>
+      {fullscreen ? (
+        <i className="fas fa-compress" />
+      ) : (
+        <i className="fas fa-expand" />
+      )}
+    </PlayerButtonStyled>
+  );
+};
+
+export default PlayToggle;

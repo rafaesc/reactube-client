@@ -37,7 +37,7 @@ class FullVideo extends React.Component<IProps> {
     clearTimeout(this.controlsHideTimer);
     this.controlsHideTimer = setTimeout(() => {
       userActivate(false);
-    }, 3000);
+    }, 1500);
   };
 
   public handleFocus = () => {
@@ -50,10 +50,8 @@ class FullVideo extends React.Component<IProps> {
 
   public render() {
     const provider = this.props.provider;
-    const { fullscreen } = provider;
-    const {
-      currentVideo: { src, id, title }
-    } = this.props;
+    const { fullscreen, userActivity, paused } = provider;
+    const { src, id, title } = this.props.currentVideo;
 
     const thereIsId = id !== "";
 
@@ -70,6 +68,7 @@ class FullVideo extends React.Component<IProps> {
     return (
       <FullVideoStyled
         fullscreen={fullscreen}
+        showControls={userActivity || paused}
         onTouchStart={this.startControlsTimer}
         onMouseDown={this.startControlsTimer}
         onMouseMove={this.startControlsTimer}

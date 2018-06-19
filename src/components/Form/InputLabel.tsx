@@ -8,7 +8,8 @@ import {
   InputLabelTagStyled,
   ErrorStyled,
   VerifyStyled,
-  LoadingStyled
+  LoadingStyled,
+  LabelTagsStyled
 } from "./styles";
 
 interface IProps {
@@ -46,7 +47,7 @@ const InputLabel: React.SFC<IProps> = props => {
 
   return type === "tags" ? (
     <InputLabelTagStyled>
-      <LabelStyled>{props.label}</LabelStyled>
+      <LabelTagsStyled>{props.label}</LabelTagsStyled>
       <TagsInput value={props.value} addOnBlur={true} onChange={handleChange} />
     </InputLabelTagStyled>
   ) : (

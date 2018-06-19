@@ -23,34 +23,35 @@ interface IProps extends IPropsFromFullVideo {
   video: Video;
 }
 
-export default class ControlBar extends React.Component<IProps> {
-  public render() {
-    const { currentTime, duration } = this.props.provider;
-    const totalTimeFormat = formatTime(duration);
-    const currentTimeFormat = formatTime(currentTime, duration);
-    return (
-      <ControlBarStyled>
-        <ControlBarGradientStyled />
-        <ControlBarTopStyled>
-          <ProgressControl {...this.props} />
-          <FragmentControl {...this.props} />
-        </ControlBarTopStyled>
-        <ControlBarBottomStyled>
-          <ControlBarBottomSideStyled>
-            <BackButton {...this.props} />
-            <PlayToggle {...this.props} />
-            <NextButton {...this.props} />
-            <VolumeMenuButton {...this.props} />
-            <TextPlayerStyled>
-              {currentTimeFormat} / {totalTimeFormat}
-            </TextPlayerStyled>
-          </ControlBarBottomSideStyled>
-          <ControlBarBottomSideStyled>
-            <FullscreenToggle {...this.props} />
-            <EditButton {...this.props} />
-          </ControlBarBottomSideStyled>
-        </ControlBarBottomStyled>
-      </ControlBarStyled>
-    );
-  }
-}
+const ControlBar: React.SFC<IProps> = props => {
+  const { currentTime, duration } = props.provider;
+  const totalTimeFormat = formatTime(duration);
+  const currentTimeFormat = formatTime(currentTime, duration);
+
+  return (
+    <ControlBarStyled>
+      <ControlBarGradientStyled />
+      <ControlBarTopStyled>
+        <ProgressControl {...props} />
+        <FragmentControl {...props} />
+      </ControlBarTopStyled>
+      <ControlBarBottomStyled>
+        <ControlBarBottomSideStyled>
+          <BackButton {...props} />
+          <PlayToggle {...props} />
+          <NextButton {...props} />
+          <VolumeMenuButton {...props} />
+          <TextPlayerStyled>
+            {currentTimeFormat} / {totalTimeFormat}
+          </TextPlayerStyled>
+        </ControlBarBottomSideStyled>
+        <ControlBarBottomSideStyled>
+          <FullscreenToggle {...props} />
+          <EditButton {...props} />
+        </ControlBarBottomSideStyled>
+      </ControlBarBottomStyled>
+    </ControlBarStyled>
+  );
+};
+
+export default ControlBar;

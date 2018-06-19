@@ -12,13 +12,13 @@ const button: StyledFunction<IDivStyled & React.HTMLProps<HTMLInputElement>> =
   styled.button;
 
 export const PlaylistWrapper = div`
-  width: 100%;
   display: inline-block;
   background-color: ${({ expand }) =>
     expand ? theme.backgroundColor : theme.grayLightColor};
+  width: ${({ expand }) => (expand ? "700px" : "500px")};
 
   @media ${device.laptopS} {
-    width: ${({ expand }) => (expand ? "700px" : "500px")};
+    width: 100%;
   }
 `;
 
@@ -65,6 +65,10 @@ align-items: center;
 span {
   margin-left: 7px;
 }
+@media ${device.laptopS} {
+  padding: 0;
+  padding-right: 10px;
+}
 `;
 
 export const PlaylistHeadButtonStyled = button`
@@ -74,14 +78,14 @@ color: ${({ active }) =>
 
 export const PlaylistBodyStyled = div`
 padding: 10px;
-height: auto;
 overflow-y: auto;
-  @media ${device.laptopM} {
-    text-align: left;
+height: ${({ expand }) => (expand ? "auto" : "427px")};
+  @media ${device.laptopS} {
     height: auto;
   }
   @media ${device.laptop} {
-    height: ${({ expand }) => (expand ? "auto" : "427px")};
+    text-align: left;
+    height: auto;
   }
 `;
 
@@ -138,6 +142,10 @@ text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 2;
 -webkit-box-orient: vertical;
+@media ${device.laptopS} {
+  font-size: 12px;
+  width: 50%;
+}
 h3 {
   margin-top: 5px;
   margin-bottom: 10px;
@@ -168,4 +176,7 @@ color: ${() => theme.darkColor};
   i {
     font-size: 10px;
   }
+@media ${device.laptopS} {
+  display:none
+}
 `;

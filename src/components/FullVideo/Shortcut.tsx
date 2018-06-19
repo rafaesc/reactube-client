@@ -23,11 +23,11 @@ export default class Shortcut extends React.Component<IProps> {
         keyCode: 32 // spacebar
       },
       {
-        handle: this.rightArrow,
+        handle: this.leftArrow,
         keyCode: 37 // Left arrow
       },
       {
-        handle: this.leftArrow,
+        handle: this.rightArrow,
         keyCode: 39 // Right arrow
       },
       {
@@ -75,11 +75,11 @@ export default class Shortcut extends React.Component<IProps> {
   };
 
   public leftArrow = () => {
-    this.props.video.forward(5);
+    this.props.video.replay(5);
   };
 
   public rightArrow = () => {
-    this.props.video.replay(5);
+    this.props.video.forward(5);
   };
 
   public upArrow = () => {

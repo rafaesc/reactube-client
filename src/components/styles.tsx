@@ -21,17 +21,17 @@ export const SidebarStyled = div`
   background: whitesmoke;
   height: 100%;
   top: 0;
-  display:none;
+  display:block;
   @media ${device.laptopL} {
-    display:block;
+    display:none;
   }
 `;
 
 export const PageWithSidebarStyled = styled(PageStyled)`
-  margin-left: 0px;
   background: #fafafa;
+  margin-left: 170px;
   @media ${device.laptopL} {
-    margin-left: 170px;
+    margin-left: 0px;
   }
 `;
 
@@ -120,16 +120,19 @@ export const ContentStyled = div`
 export const ContentDinamicStyled = styled(ContentStyled)`
   max-width: initial;
   padding-top: 40px;
-  text-align: center;
-  @media ${device.laptop} {
-    width: 856px;
-  }
-  @media ${device.laptopL} {
+  width: 1284px;
+  text-align: left;
+  @media ${device.laptopM} {
     width: 1070px;
   }
-  @media ${device.laptopM} {
-    width: 1284px;
-    text-align: left;
+  @media ${device.laptopL} {
+    width: 856px;
+  }
+  @media ${device.laptop} {
+    width: auto;
+  }
+  @media ${device.mobileL} {
+    padding-top: 0px;
   }
 `;
 
@@ -137,6 +140,9 @@ export const ContentFullStyled = styled(ContentStyled)`
   width: 100%;
   max-width: initial;
   background: white;
+  @media ${device.mobileL} {
+    padding-top: 0;
+  }
 `;
 
 export const CardStyled = div`
@@ -150,4 +156,8 @@ export const CardStyled = div`
   border: 1px solid #ddd;
   background-color: #fff;
   padding: 15px;
+  @media ${device.laptop} {
+    width: 86%;
+    margin: 0 auto;
+  }
 `;

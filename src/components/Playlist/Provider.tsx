@@ -12,7 +12,7 @@ export default class PlaylistProvider extends React.Component<any, IState> {
   public static Consumer = Context.Consumer;
 
   public state = {
-    random: false
+    random: false // TODO: Random
   };
 
   public render() {

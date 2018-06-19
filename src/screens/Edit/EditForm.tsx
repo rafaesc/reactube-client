@@ -153,8 +153,6 @@ export default class EditForm extends React.Component<IProps> {
   public handleSubmit = e => {
     e.preventDefault();
 
-    const {} = this.state;
-
     this.setState({ submitted: true });
     this.validForm(() => {
       const isThereErrors = Object.keys(this.state.errors).length;

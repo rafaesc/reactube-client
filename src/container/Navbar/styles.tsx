@@ -1,7 +1,10 @@
 import * as React from "react";
 import { StyledFunction } from "styled-components";
-import { InputLabelGeneralStyled } from "../../components/Form/styles";
-import styled, { theme } from "../../theme";
+import {
+  InputLabelGeneralStyled,
+  InputStyled
+} from "../../components/Form/styles";
+import styled, { theme, device } from "../../theme";
 // tslint:disable:no-shadowed-variable
 
 interface IDivStyled {
@@ -50,6 +53,12 @@ ${InputLabelGeneralStyled} {
     padding: 2px 11px;
     border-radius: 2px 0 0 2px;
     width: 400px;
+    @media ${device.laptop} {
+      width: 95%;
+      border-radius: 2px;
+      border-width: 0px;
+      margin-left: 5px;
+    }
   }
 }
 `;
@@ -61,6 +70,11 @@ display: flex;
 flex-direction: row;
 align-items: center;
 flex-wrap: wrap;
+@media ${device.laptop} {
+  padding: 0 5px;
+  background-color: ${({ gray }) =>
+    gray ? theme.darkHeader : theme.primaryColor}
+}
 `;
 
 export const NavbarLogoStyled = div`
@@ -68,8 +82,16 @@ height: 24px;
 width: 40px;
 cursor: pointer;
 svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  @media ${device.laptop} {
+    rect {
+      fill: white;
+    }
+    polygon {
+      fill: ${({ gray }) => (gray ? theme.darkHeader : theme.primaryColor)}
+    }
+  }
 }
 `;
 
@@ -91,9 +113,24 @@ a {
     border-color: #c6c6c6;
     background-color: #f0f0f0;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    @media ${device.laptop} {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+  }
+  @media ${device.laptop} {
+    background: transparent;
+    border-color: transparent;
+    color: white;
+    padding: 6px 11px;
   }
 }
-
+@media ${device.laptop} {
+  span {
+    display: none;
+  }
+}
 `;
 
 export const NavbarButtonStyled = button`
@@ -108,6 +145,20 @@ padding: 6px 20px;
   border-color: #c6c6c6;
   background-color: #f0f0f0;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+  @media ${device.laptop} {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+@media ${device.laptop} {
+  background: transparent;
+  border-color: transparent;
+  color: white;
+  padding: 6px 11px;
+  span {
+    display: none;
+  }
 }
 `;
 
@@ -118,6 +169,12 @@ export const navbarButton: StyledFunction<
 export const SearchBoxStyled = div`
 margin: 0 40px;
 display: flex;
+
+@media ${device.laptop} {
+  margin: 0;
+  flex: 1;
+  padding-right: 7px;
+}
 `;
 
 export const SearchBoxFormStyled = form`
@@ -129,4 +186,9 @@ export const SearchBoxButtonStyled = navbarButton`
 border-radius: 0 2px 2px 0;
 width: 65px;
 padding: 0px;
+@media ${device.laptop} {
+  border-color: transparent;
+  background-color: transparent;
+  color: white;
+}
 `;

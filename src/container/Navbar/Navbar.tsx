@@ -14,14 +14,16 @@ import LocalStorageProvider, {
 
 interface IProps extends RouteComponentProps<any>, ILocalStorageProvider {}
 
-const Navbar = withRouter(({ history, resetDatabase }: IProps) => {
+const Navbar = withRouter(({ history, location, resetDatabase }: IProps) => {
   const handleRecover = () => {
     resetDatabase();
   };
 
+  const isInVideoPage = location.pathname.indexOf("/video") > -1;
+
   return (
-    <NavbarStyled>
-      <NavbarLogoStyled>
+    <NavbarStyled gray={isInVideoPage}>
+      <NavbarLogoStyled gray={isInVideoPage}>
         <Link to="/">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47328 33689">
             <rect
@@ -43,11 +45,11 @@ const Navbar = withRouter(({ history, resetDatabase }: IProps) => {
       <SearchBox history={history} />
       <NavBarLink>
         <Link to="/edit">
-          <i className="fas fa-plus" /> Add videos
+          <i className="fas fa-plus" /> <span>Add videos</span>
         </Link>
       </NavBarLink>
       <NavbarButtonStyled onClick={handleRecover}>
-        <i className="fas fa-download" /> Recover localstorage
+        <i className="fas fa-download" /> <span>Recover localstorage</span>
       </NavbarButtonStyled>
     </NavbarStyled>
   );

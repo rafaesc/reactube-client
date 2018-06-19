@@ -29,14 +29,21 @@ interface IProps extends IPropsExternal, IVideoPlayerProvider {
   children?: React.ReactNode;
 }
 
-class VideoPlayer extends React.Component<IProps> {
-  public handleChangeTimeFragment = (startTime, endTime) => {
-    const { updatePlaylistItem, videoSelected } = this.props;
+const VideoPlayer: React.SFC<IProps> = props => {
+  const handleChangeTimeFragment = (startTime, endTime) => {
+    const { updatePlaylistItem, videoSelected } = props;
     updatePlaylistItem(videoSelected, { startTime, endTime });
   };
 
-  public handlePlaylistAction = (value: "next" | "back") => {
-    const { playlist, videoSelected, updateSelected, repeat } = this.props;
+  const handleClickPlaylistItem = (id: string) => {
+    const { updateSelected } = props;
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    updateSelected(id);
+  };
+
+  const handlePlaylistAction = (value: "next" | "back") => {
+    const { playlist, videoSelected, updateSelected, repeat } = props;
     let newVideoSelected;
     const index = findIndexPlaylistForId(playlist, videoSelected);
 
@@ -56,8 +63,8 @@ class VideoPlayer extends React.Component<IProps> {
     }
   };
 
-  public getPlaylistChildren = child => {
-    const { setAutoPlay, repeat, setRepeat, autoPlaylist } = this.props;
+  const getPlaylistChildren = child => {
+    const { setAutoPlay, repeat, setRepeat, autoPlaylist } = props;
     const children = React.Children.toArray(child.props.children);
 
     children.unshift(
@@ -79,27 +86,28 @@ class VideoPlayer extends React.Component<IProps> {
     return children;
   };
 
-  public renderChildren = () => {
+  const renderChildren = () => {
     const {
       playlist,
       videoSelected,
-      updateSelected,
       autoPlaylist,
       repeat,
       setAutoPlay
-    } = this.props;
+    } = props;
 
-    return React.Children.toArray(this.props.children).map((child: any) => {
+    return React.Children.toArray(props.children).map((child: any) => {
+      // Take all Playlist components
       if (isTypeEqual(child, Playlist)) {
-        const props: IPlaylistProps = {
-          children: this.getPlaylistChildren(child),
-          onClick: updateSelected,
+        const newProps: IPlaylistProps = {
+          children: getPlaylistChildren(child),
+          onClick: handleClickPlaylistItem,
           playlist,
           videoSelected
         };
-        return React.cloneElement(child, props);
+        return React.cloneElement(child, newProps);
       }
 
+      // Take all FullVideo components
       if (isTypeEqual(child, FullVideo)) {
         const index = findIndexPlaylistForId(playlist, videoSelected);
         let nextVideo;
@@ -118,26 +126,24 @@ class VideoPlayer extends React.Component<IProps> {
           itemSelected = playlist[index];
         }
 
-        const props: IFullVideoProps = {
+        const newProps: IFullVideoProps = {
           autoPlay: true,
           autoPlaylist: nextVideo ? autoPlaylist : false,
           currentVideo: itemSelected,
           nextVideo,
-          onPlaylistAction: this.handlePlaylistAction,
+          onPlaylistAction: handlePlaylistAction,
           setAutoPlay,
-          updatedTimeFragment: this.handleChangeTimeFragment
+          updatedTimeFragment: handleChangeTimeFragment
         };
 
-        return React.cloneElement(child, props);
+        return React.cloneElement(child, newProps);
       }
       return null;
     });
   };
 
-  public render() {
-    return <VideoPlayStyled>{this.renderChildren()}</VideoPlayStyled>;
-  }
-}
+  return <VideoPlayStyled>{renderChildren()}</VideoPlayStyled>;
+};
 
 export default (props: IPropsExternal) => (
   <VideoPlayerProvider>

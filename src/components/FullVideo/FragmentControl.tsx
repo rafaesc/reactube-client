@@ -35,6 +35,7 @@ export default class FragmentControl extends React.Component<IProps, IState> {
       provider: { duration },
       currentVideo: { startTime, endTime }
     } = this.props;
+
     this.updateValue(startTime, endTime, duration);
   }
 
@@ -43,6 +44,8 @@ export default class FragmentControl extends React.Component<IProps, IState> {
       provider: { duration },
       currentVideo: { startTime, endTime }
     } = this.props;
+
+    // Changed video
     if (
       nextProps.provider.duration &&
       (nextProps.currentVideo.startTime !== startTime ||

@@ -25,13 +25,8 @@ class Edit extends React.Component<IProps> {
   public state = {};
 
   public handleSuccess = (playlist: IPlaylistItem) => {
-    const {
-      match: {
-        params: { id }
-      },
-      updatePlaylistItem,
-      addPlaylistItem
-    } = this.props;
+    const { updatePlaylistItem, addPlaylistItem } = this.props;
+    const { id } = this.props.match.params;
 
     if (id) {
       updatePlaylistItem(id, playlist);
@@ -41,13 +36,8 @@ class Edit extends React.Component<IProps> {
   };
 
   public render() {
-    const {
-      playlist,
-      history,
-      match: {
-        params: { id }
-      }
-    } = this.props;
+    const { playlist, history } = this.props;
+    const { id } = this.props.match.params;
     let index;
     if (id) {
       index = findIndexPlaylistForId(playlist, id);

@@ -35,21 +35,6 @@ export const VideoStyled = styled.video`
   height: 100%;
 `;
 
-export const FullVideoStyled = div`
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  max-width: ${({ fullscreen }) => (fullscreen ? "100%" : "900px")};
-  height: ${({ fullscreen }) => (fullscreen ? "100%" : "auto")};
-  background: black;
-  font-size: 11px;
-  margin: 0 auto;
-
-  @media ${device.laptopS} {
-    margin: 0;
-  }
-`;
-
 export const BigPlayButtonStyled = button`
 position: absolute;
 top: 0;
@@ -65,6 +50,9 @@ export const ControlBarStyled = div`
   width: 100%;
   bottom: 0;
   color: white;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration:  ${() => theme.velocityTransition};
 `;
 
 export const ControlBarGradientStyled = div`
@@ -102,6 +90,7 @@ export const ControlBarBottomStyled = div`
   display: flex;
   padding: 8px;
   justify-content: space-between;
+  text-shadow: 0 0 2px rgba(0,0,0,.5);
   z-index: 2;
 `;
 
@@ -112,12 +101,16 @@ export const ControlBarBottomSideStyled = div`
 
 export const TitleStyled = div`
   position: absolute;
+  text-shadow: 0 0 2px rgba(0,0,0,.5);
   color: white;
   z-index: 1;
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
   font-size: 164%;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration:  ${() => theme.velocityTransition};
 `;
 
 export const LoadingSpinnerStyled = div`
@@ -300,6 +293,9 @@ export const VolumenMenuButtonStyled = div`
   width: 100px;
   margin-right: 15px;
   padding-top: 2px;
+  @media ${device.laptop} {
+    display:none;
+  }
 `;
 
 export const VolumeIcon = styled(PlayerButtonStyled)`
@@ -330,4 +326,23 @@ export const ProgressControlStyled = div`
   position: absolute;
   width: 100%;
   display: ${props => (props.show ? "none" : "block")}
+`;
+
+export const FullVideoStyled = div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: ${({ fullscreen }) => (fullscreen ? "100%" : "900px")};
+  height: ${({ fullscreen }) => (fullscreen ? "100%" : "auto")};
+  background: black;
+  font-size: 11px;
+  margin: 0;
+
+  @media ${device.laptopS} {
+    margin: 0 auto;
+  }
+
+  ${TitleStyled}, ${ControlBarStyled} {
+    opacity: ${({ showControls }) => (showControls ? "1" : "0")}
+  }
 `;

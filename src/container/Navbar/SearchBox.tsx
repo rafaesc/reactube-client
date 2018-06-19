@@ -21,7 +21,13 @@ class SearchBox extends React.Component<IProps> {
   };
 
   public handleSubmit = e => {
-    this.props.history.push("/search/" + this.state.value);
+    const { value } = this.state;
+    const cleanValue = value.trim()
+    if (cleanValue === "") {
+      this.props.history.push("/");
+    } else {
+      this.props.history.push("/search/" + cleanValue);
+    }
     e.preventDefault();
   };
 

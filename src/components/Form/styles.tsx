@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyledFunction } from "styled-components";
-import styled, { theme } from "../../theme";
+import styled, { theme, device } from "../../theme";
 // tslint:disable:no-shadowed-variable
 
 interface IDivStyled {
@@ -37,6 +37,10 @@ export const FormStyled = form`
 ${InputLabelGeneralStyled} {
   input {
     margin-left: 200px;
+    @media ${device.laptop} {
+      margin-left: 45%;
+      width: 50%;
+    }
   }
 }
 `;
@@ -67,6 +71,10 @@ export const InputLabelTagStyled = div`
   .react-tagsinput {
     width: 450px;
     margin-left: 200px;
+    @media ${device.laptop} {
+      margin-left: 0;
+      width: 100%;
+    }
     :hover {
       border-color: #b9b9b9;
     }
@@ -95,4 +103,15 @@ font-size: 13px;
 line-height: 1.2;
 color: #555;
 position: absolute;
+@media ${device.laptop} {
+  max-width: 37%;
+}
 `;
+
+export const LabelTagsStyled = styled(LabelStyled)`
+@media ${device.laptop} {
+  display: block;
+  position: relative;
+  margin-bottom: 10px;
+}
+`

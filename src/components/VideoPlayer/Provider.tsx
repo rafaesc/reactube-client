@@ -9,7 +9,7 @@ interface IState {
   autoPlaylist: boolean;
   playlistItem: IPlaylistItem | null;
   repeat: boolean;
-  theaterMode: boolean;
+  theaterMode: boolean; // theater Mode TODO:
 }
 
 export interface IVideoPlayerProvider extends IState {

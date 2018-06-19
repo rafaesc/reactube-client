@@ -19,7 +19,7 @@ export interface IPropsExternal {
   children?: any;
 }
 
-export interface IProps extends IPropsExternal, IPlaylistProvider { }
+export interface IProps extends IPropsExternal, IPlaylistProvider {}
 
 export const PlaylistItem = props => props.children(props.id);
 
@@ -27,50 +27,50 @@ export const PlaylistHeader: React.SFC<any> = props => (
   <PlaylistHeadItemStyled>{props.children}</PlaylistHeadItemStyled>
 );
 
-class Playlist extends React.Component<IProps> {
-  public renderHeader = (): JSX.Element | null => {
-    const listPlaylistHeader = React.Children.toArray(this.props.children).filter((child: any) => {
-      return isTypeEqual(child, PlaylistHeader);
-    });
+const Playlist: React.SFC<IProps> = props => {
+  const renderHeader = (): JSX.Element | null => {
+    const listPlaylistHeader = React.Children.toArray(props.children).filter(
+      (child: any) => {
+        return isTypeEqual(child, PlaylistHeader);
+      }
+    );
     if (listPlaylistHeader.length) {
-      return <PlaylistHeadStyled>{listPlaylistHeader}</PlaylistHeadStyled>
+      return <PlaylistHeadStyled>{listPlaylistHeader}</PlaylistHeadStyled>;
     }
-    return null
+    return null;
   };
 
-  public renderItemChildren = (id: string) => {
-    return React.Children.toArray(this.props.children)
+  const renderItemChildren = (id: string) => {
+    return React.Children.toArray(props.children)
       .filter((child: any) => {
         return isTypeEqual(child, PlaylistItem);
       })
       .map((child: any) => React.cloneElement(child, { id }));
   };
 
-  public render() {
-    const { playlist = [], onClick, videoSelected, expand } = this.props;
-    return (
-      <PlaylistWrapper expand={expand}>
-        <PlaylistContainer>
-          {this.renderHeader()}
-          <PlaylistBodyStyled expand={expand}>
-            {playlist.map((item, index) => (
-              <Item
-                selected={videoSelected}
-                index={index}
-                key={index}
-                expand={expand}
-                {...item}
-                onClick={onClick}
-              >
-                {this.renderItemChildren(item.id)}
-              </Item>
-            ))}
-          </PlaylistBodyStyled>
-        </PlaylistContainer>
-      </PlaylistWrapper>
-    );
-  }
-}
+  const { playlist = [], onClick, videoSelected, expand } = props;
+  return (
+    <PlaylistWrapper expand={expand}>
+      <PlaylistContainer>
+        {renderHeader()}
+        <PlaylistBodyStyled expand={expand}>
+          {playlist.map((item, index) => (
+            <Item
+              selected={videoSelected}
+              index={index}
+              key={index}
+              expand={expand}
+              {...item}
+              onClick={onClick}
+            >
+              {renderItemChildren(item.id)}
+            </Item>
+          ))}
+        </PlaylistBodyStyled>
+      </PlaylistContainer>
+    </PlaylistWrapper>
+  );
+};
 
 export default (props: IPropsExternal) => (
   <PlaylistProvider>

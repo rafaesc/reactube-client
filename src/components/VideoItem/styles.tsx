@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyledFunction } from "styled-components";
-import styled, { theme } from "../../theme";
+import styled, { theme, device } from "../../theme";
 // tslint:disable:no-shadowed-variable
 
 interface IDivStyled {
@@ -12,8 +12,12 @@ const div: StyledFunction<IDivStyled & React.HTMLProps<HTMLInputElement>> =
 
 export const VideoItemListStyled = div`
   width: 100%;
-  text-align:left;
-  `;
+  display: flex;
+  flex-wrap: wrap;
+  @media ${device.laptopS} {
+    justify-content: center;
+  }
+`;
 
 export const VideoItemStyled = div`
 width: 210px;
@@ -22,6 +26,10 @@ position: relative;
 vertical-align: top;
 padding-right: 4px;
 margin-bottom: 20px;
+@media ${device.mobileL} {
+  width: 100%;
+  padding: 12px;
+}
 `;
 
 export const VideoItemImage = div`
@@ -30,6 +38,12 @@ background-color: black;
 background-image: url(${({ image }) => image});
 background-size: cover;
 background-position: center;
+@media ${device.mobileL} {
+  padding-bottom: 56.25%;
+  position: relative;
+  width: 100%;
+  height: 0px;
+}
 `;
 
 export const VideoItemBottom = div`

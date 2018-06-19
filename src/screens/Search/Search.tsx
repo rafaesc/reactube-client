@@ -20,11 +20,7 @@ interface IProps
     RouteComponentProps<IRouterProps> {}
 
 const Search: React.SFC<IProps> = props => {
-  const {
-    match: {
-      params: { value }
-    }
-  } = props;
+  const value = props.match.params.value;
 
   const filteredPlaylist = props.playlist.filter(item => {
     return item.title.toLowerCase().indexOf(value.toLowerCase()) > -1;

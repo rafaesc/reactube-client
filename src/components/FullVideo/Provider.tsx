@@ -87,7 +87,7 @@ export default class FullVideoProvider extends React.Component<any, IState> {
       readyState: 0,
       seeking: false,
       seekingTime: 0,
-      userActivity: true,
+      userActivity: false,
       video: null,
       videoHeight: 0,
       videoWidth: 0,
