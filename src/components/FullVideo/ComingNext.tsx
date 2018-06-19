@@ -16,6 +16,8 @@ import {
 import { IVideoClip } from "../types";
 import { showSpinnerNextVideo } from "../../utils";
 
+const NEXT_DURATION = 3;
+
 class CommingNext extends React.Component<
   {
     nextVideoClip: IVideoClip;
@@ -26,7 +28,7 @@ class CommingNext extends React.Component<
 > {
   public time;
   public state = {
-    count: 3
+    count: NEXT_DURATION
   };
 
   public componentDidMount() {
@@ -41,7 +43,7 @@ class CommingNext extends React.Component<
 
   public componentWillUnmount() {
     clearInterval(this.time);
-    this.setState({ count: 5 });
+    this.setState({ count: NEXT_DURATION });
   }
 
   public launchNextVideoClip = () => {

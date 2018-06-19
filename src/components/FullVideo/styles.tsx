@@ -197,6 +197,10 @@ export const ComingNextStyled = div`
   height: 100%;
   top: 0;
   color: white;
+  @media ${device.tablet} {
+    z-index: 5;
+    background: black;
+  }
 `;
 
 export const ComingNextImageStyled = div`
@@ -216,6 +220,11 @@ export const ComingNextTopStyled = div`
   margin-right: auto;
   bottom: 50%;
   margin-bottom: 48px;
+
+  @media ${device.tablet} {
+    font-size: 8px;
+    margin-bottom: 29px;
+  }
 `;
 
 export const ComingNextHeaderStyled = div`
@@ -246,6 +255,12 @@ width: 64px;
 height: 64px;
 margin: -32px 0 0 -32px;
 cursor: pointer;
+
+@media ${device.tablet} {
+  margin: -23px 0 0 -24px;
+  width: 45px;
+  height: 45px;
+}
 `;
 
 export const ComingNextIconStyled = div`
@@ -253,6 +268,12 @@ export const ComingNextIconStyled = div`
   font-size: 33px;
   left: 18px;
   top: 14px;
+
+  @media ${device.tablet} {
+    left: 14px;
+    top: 12px;
+    font-size: 19px;
+  }
 `;
 
 export const ComingNextBottomStyled = div`
@@ -263,6 +284,10 @@ export const ComingNextBottomStyled = div`
   top: 50%;
   margin-top: 48px;
   text-align: center;
+
+  @media ${device.tablet} {
+    margin-top: 27px;
+  }
 `;
 
 export const ComingNextButtonStyled = div`
