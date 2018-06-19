@@ -1,6 +1,8 @@
-
 export { default as InputLabel } from "./Form/InputLabel";
-export { default as FullVideo } from "./FullVideo/FullVideo";
+export {
+  default as FullVideo,
+  IExternalProps as IFullVideoProps
+} from "./FullVideo/FullVideo";
 export { default as VideoPlayer } from "./VideoPlayer/VideoPlayer";
 export { default as VideoItem } from "./VideoItem/VideoItem";
 export { VideoItemListStyled } from "./VideoItem/styles";

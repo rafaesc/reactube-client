@@ -8,9 +8,7 @@ import {
   TitlePageStyled,
   IVideoClip
 } from "../../components";
-import LocalStorageProvider, {
-  ILocalStorageProvider
-} from "../../LocalStorageProvider";
+import AppProvider, { IAppProvider } from "../../AppProvider";
 import { findVideoClipIndexForId } from "../../utils";
 
 interface IRouterProps {
@@ -18,7 +16,7 @@ interface IRouterProps {
 }
 
 interface IProps
-  extends ILocalStorageProvider,
+  extends IAppProvider,
     RouteComponentProps<IRouterProps> {}
 
 class Edit extends React.Component<IProps> {
@@ -64,7 +62,7 @@ class Edit extends React.Component<IProps> {
 }
 
 export default (props: RouteComponentProps<IRouterProps>) => (
-  <LocalStorageProvider.Consumer>
-    {(value: ILocalStorageProvider) => <Edit {...props} {...value} />}
-  </LocalStorageProvider.Consumer>
+  <AppProvider.Consumer>
+    {(value: IAppProvider) => <Edit {...props} {...value} />}
+  </AppProvider.Consumer>
 );

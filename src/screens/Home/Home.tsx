@@ -7,11 +7,9 @@ import {
   PageWithSidebarStyled
 } from "../../components";
 
-import LocalStorageProvider, {
-  ILocalStorageProvider
-} from "../../LocalStorageProvider";
+import AppProvider, { IAppProvider } from "../../AppProvider";
 
-interface IProps extends ILocalStorageProvider {}
+interface IProps extends IAppProvider {}
 
 const Home: React.SFC<IProps> = props => {
   return (
@@ -31,7 +29,7 @@ const Home: React.SFC<IProps> = props => {
 };
 
 export default () => (
-  <LocalStorageProvider.Consumer>
-    {(value: ILocalStorageProvider) => <Home {...value} />}
-  </LocalStorageProvider.Consumer>
+  <AppProvider.Consumer>
+    {(value: IAppProvider) => <Home {...value} />}
+  </AppProvider.Consumer>
 );

@@ -87,13 +87,7 @@ const VideoPlayer: React.SFC<IProps> = props => {
   };
 
   const renderChildren = () => {
-    const {
-      playlist,
-      idSelected,
-      autoPlaylist,
-      repeat,
-      setAutoPlay
-    } = props;
+    const { playlist, idSelected, autoPlaylist, repeat, setAutoPlay } = props;
 
     return React.Children.toArray(props.children).map((child: any) => {
       // Take all Playlist components
@@ -112,11 +106,7 @@ const VideoPlayer: React.SFC<IProps> = props => {
         const index = findVideoClipIndexForId(playlist, idSelected);
         let nextVideoClip;
         let videoClipSelected;
-        if (index === null) {
-          videoClipSelected = {
-            id: ""
-          };
-        } else {
+        if (index !== null) {
           nextVideoClip = playlist[index + 1];
 
           if (repeat && !nextVideoClip) {

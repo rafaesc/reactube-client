@@ -121,7 +121,7 @@ export default class Video extends React.Component<IProps> {
     } = this.props;
     onLoadStart(this.getVideo());
 
-    this.video.currentTime = startTime;
+    this.video.currentTime = startTime || 0;
   };
 
   public handleCanPlay = () => {

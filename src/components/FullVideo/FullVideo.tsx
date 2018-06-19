@@ -4,7 +4,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import ComingNext from "./ComingNext";
 import Shortcut from "./Shortcut";
 import Video from "./Video";
-import { IVideoClip } from "../types";
+import { IVideoClip, IVideoClipOptional } from "../types";
 import FullVideoProvider, { IFullVideoProvider } from "./Provider";
 
 import { FullVideoStyled, TitleStyled } from "./styles";
@@ -13,7 +13,7 @@ import BigPlayButton from "./BigPlayButton";
 export interface IExternalProps {
   autoPlay?: boolean;
   autoPlaylist?: boolean;
-  currentVideoClip: IVideoClip;
+  currentVideoClip?: IVideoClip;
   nextVideoClip?: IVideoClip;
   onChangeTimeFragment: (startTime: number, endTime: number) => void;
   onChangeAutoPlay?: (autoPlaylist: boolean) => void;
@@ -21,13 +21,27 @@ export interface IExternalProps {
   children?: any;
 }
 
-export interface IProps extends IExternalProps, IFullVideoProvider {}
+export interface IProps extends IExternalProps, IFullVideoProvider {
+  currentVideoClip: IVideoClip;
+}
+
+interface IDefaultProps {
+  currentVideoClip: IVideoClipOptional;
+}
 
 export interface IPropsChildrens extends IProps {
   video: any;
 }
 
 class FullVideo extends React.Component<IProps> {
+  public static defaultProps: IDefaultProps = {
+    currentVideoClip: {
+      id: "",
+      src: "",
+      startTime: 0
+    }
+  };
+
   public video: Video;
   public controlsHideTimer: any;
 

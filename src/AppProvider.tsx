@@ -18,17 +18,19 @@ const KEY_LOCALSTORAGE = NAME_LOCALSTORAGE + VERSION_LOCALSTORAGE;
 const Context = React.createContext({});
 
 export interface IState {
+  idVideo: string;
   playlist: IVideoClip[];
 }
 
-export interface ILocalStorageProvider extends IState {
+export interface IAppProvider extends IState {
   resetDatabase: () => void;
   removePlaylistItem: (id: string) => void;
+  setIdVideo: (idVideo: string) => void;
   setVideoClip: (id: string, videoClip: IVideoClipOptional) => void;
   addVideoClip: (videoClip: IVideoClip) => void;
 }
 
-export default class LocalStorageProvider extends React.Component<any, IState> {
+export default class AppProvider extends React.Component<any, IState> {
   public static Consumer = Context.Consumer;
 
   constructor(props) {
@@ -45,6 +47,7 @@ export default class LocalStorageProvider extends React.Component<any, IState> {
       setStorage(KEY_LOCALSTORAGE, playlist);
     }
     this.state = {
+      idVideo: "",
       playlist
     };
   }
@@ -56,6 +59,12 @@ export default class LocalStorageProvider extends React.Component<any, IState> {
       },
       this.updateStorage
     );
+  };
+
+  public setIdVideo = (idVideo: string) => {
+    this.setState({
+      idVideo
+    });
   };
 
   public removePlaylistItem = (id: string) => {
@@ -92,11 +101,12 @@ export default class LocalStorageProvider extends React.Component<any, IState> {
   };
 
   public render() {
-    const value: ILocalStorageProvider = {
+    const value: IAppProvider = {
       ...this.state,
       addVideoClip: this.addPlaylistItem,
       removePlaylistItem: this.removePlaylistItem,
       resetDatabase: this.resetDatabase,
+      setIdVideo: this.setIdVideo,
       setVideoClip: this.updatePlaylistItem
     };
 

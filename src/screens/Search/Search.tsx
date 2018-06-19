@@ -7,16 +7,14 @@ import {
   Playlist
 } from "../../components";
 
-import LocalStorageProvider, {
-  ILocalStorageProvider
-} from "../../LocalStorageProvider";
+import AppProvider, { IAppProvider } from "../../AppProvider";
 
 interface IRouterProps {
   value: string;
 }
 
 interface IProps
-  extends ILocalStorageProvider,
+  extends IAppProvider,
     RouteComponentProps<IRouterProps> {}
 
 const Search: React.SFC<IProps> = props => {
@@ -47,7 +45,7 @@ const Search: React.SFC<IProps> = props => {
 };
 
 export default (props: RouteComponentProps<IRouterProps>) => (
-  <LocalStorageProvider.Consumer>
-    {(value: ILocalStorageProvider) => <Search {...props} {...value} />}
-  </LocalStorageProvider.Consumer>
+  <AppProvider.Consumer>
+    {(value: IAppProvider) => <Search {...props} {...value} />}
+  </AppProvider.Consumer>
 );

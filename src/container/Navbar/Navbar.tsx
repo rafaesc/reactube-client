@@ -8,11 +8,9 @@ import {
   NavbarButtonStyled
 } from "./styles";
 import SearchBox from "./SearchBox";
-import LocalStorageProvider, {
-  ILocalStorageProvider
-} from "../../LocalStorageProvider";
+import AppProvider, { IAppProvider } from "../../AppProvider";
 
-interface IProps extends RouteComponentProps<any>, ILocalStorageProvider {}
+interface IProps extends RouteComponentProps<any>, IAppProvider {}
 
 const Navbar = withRouter(({ history, location, resetDatabase }: IProps) => {
   const handleRecover = () => {
@@ -56,7 +54,7 @@ const Navbar = withRouter(({ history, location, resetDatabase }: IProps) => {
 });
 
 export default () => (
-  <LocalStorageProvider.Consumer>
-    {(value: ILocalStorageProvider) => <Navbar {...value} />}
-  </LocalStorageProvider.Consumer>
+  <AppProvider.Consumer>
+    {(value: IAppProvider) => <Navbar {...value} />}
+  </AppProvider.Consumer>
 );
