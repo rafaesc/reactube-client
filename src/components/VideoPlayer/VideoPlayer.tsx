@@ -127,7 +127,7 @@ const VideoPlayer: React.SFC<IProps> = props => {
         }
 
         const newProps: IFullVideoProps = {
-          autoPlay: false,
+          autoPlay: true,
           autoPlaylist: nextVideoClip ? autoPlaylist : false,
           currentVideoClip: videoClipSelected,
           nextVideoClip,
