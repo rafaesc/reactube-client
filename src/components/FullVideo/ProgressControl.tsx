@@ -45,7 +45,7 @@ export default class PlayToggle extends React.Component<IProps, IState> {
   public handleChangeComplete = (value: number) => {
     const {
       provider: { duration },
-      currentVideo: { startTime, endTime }
+      currentVideoClip: { startTime, endTime }
     } = this.props;
     const selectedTime = convertToTime(value, duration);
     let seekTime;
@@ -63,7 +63,7 @@ export default class PlayToggle extends React.Component<IProps, IState> {
   public render() {
     const {
       provider: { duration, editActive },
-      currentVideo: { startTime, endTime }
+      currentVideoClip: { startTime, endTime }
     } = this.props;
 
     return (

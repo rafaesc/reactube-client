@@ -14,13 +14,13 @@ export default class Video extends React.Component<IProps> {
   public componentWillReceiveProps(nextProps: IProps) {
     // Bug when try to repeat the same video with different id
     const {
-      currentVideo: { id, src }
+      currentVideoClip: { id, src }
     } = this.props;
     if (
-      nextProps.currentVideo.id !== id &&
-      nextProps.currentVideo.src === src
+      nextProps.currentVideoClip.id !== id &&
+      nextProps.currentVideoClip.src === src
     ) {
-      this.video.currentTime = nextProps.currentVideo.startTime;
+      this.video.currentTime = nextProps.currentVideoClip.startTime;
       this.play();
     }
   }
@@ -64,7 +64,7 @@ export default class Video extends React.Component<IProps> {
 
   public play = () => {
     const {
-      currentVideo: { endTime, startTime },
+      currentVideoClip: { endTime, startTime },
       provider: { duration }
     } = this.props;
     const fixEndTime = endTime > duration ? duration : endTime;
@@ -99,7 +99,7 @@ export default class Video extends React.Component<IProps> {
 
   public forward = (seconds: number) => {
     const {
-      currentVideo: { endTime, startTime }
+      currentVideoClip: { endTime, startTime }
     } = this.props;
     let finalCurrentTime = this.video.currentTime + seconds;
     if (finalCurrentTime >= endTime) {
@@ -117,7 +117,7 @@ export default class Video extends React.Component<IProps> {
   public handleLoadStart = () => {
     const {
       onLoadStart,
-      currentVideo: { startTime }
+      currentVideoClip: { startTime }
     } = this.props;
     onLoadStart(this.getVideo());
 
@@ -173,7 +173,7 @@ export default class Video extends React.Component<IProps> {
 
   public handleLoadedMetaData = () => {
     const {
-      currentVideo: { startTime },
+      currentVideoClip: { startTime },
       reload
     } = this.props;
     if (startTime && startTime > 0) {
@@ -189,7 +189,7 @@ export default class Video extends React.Component<IProps> {
   public handleTimeUpdate = () => {
     const {
       reload,
-      currentVideo: { endTime }
+      currentVideoClip: { endTime }
     } = this.props;
     if (this.video.currentTime >= endTime) {
       this.pause();
@@ -204,7 +204,7 @@ export default class Video extends React.Component<IProps> {
   public render() {
     const {
       autoPlay = false,
-      currentVideo: { src, endTime },
+      currentVideoClip: { src, endTime },
       autoPlaylist,
       provider: { currentTime, duration, fullscreen }
     } = this.props;

@@ -6,12 +6,12 @@ import {
   ContentStyled,
   PageStyled,
   TitlePageStyled,
-  IPlaylistItem
+  IVideoClip
 } from "../../components";
 import LocalStorageProvider, {
   ILocalStorageProvider
 } from "../../LocalStorageProvider";
-import { findIndexPlaylistForId } from "../../utils";
+import { findVideoClipIndexForId } from "../../utils";
 
 interface IRouterProps {
   id?: string;
@@ -24,14 +24,14 @@ interface IProps
 class Edit extends React.Component<IProps> {
   public state = {};
 
-  public handleSuccess = (playlist: IPlaylistItem) => {
-    const { updatePlaylistItem, addPlaylistItem } = this.props;
+  public handleSuccess = (playlist: IVideoClip) => {
+    const { setVideoClip, addVideoClip } = this.props;
     const { id } = this.props.match.params;
 
     if (id) {
-      updatePlaylistItem(id, playlist);
+      setVideoClip(id, playlist);
     } else {
-      addPlaylistItem(playlist);
+      addVideoClip(playlist);
     }
   };
 
@@ -40,7 +40,7 @@ class Edit extends React.Component<IProps> {
     const { id } = this.props.match.params;
     let index;
     if (id) {
-      index = findIndexPlaylistForId(playlist, id);
+      index = findVideoClipIndexForId(playlist, id);
     }
     const existsIndex = index !== undefined;
 

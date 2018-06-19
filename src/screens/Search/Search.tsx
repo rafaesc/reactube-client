@@ -22,8 +22,8 @@ interface IProps
 const Search: React.SFC<IProps> = props => {
   const value = props.match.params.value;
 
-  const filteredPlaylist = props.playlist.filter(item => {
-    return item.title.toLowerCase().indexOf(value.toLowerCase()) > -1;
+  const filteredPlaylist = props.playlist.filter(videoClip => {
+    return videoClip.title.toLowerCase().indexOf(value.toLowerCase()) > -1;
   });
 
   const handleClickVideo = (id: string) => {

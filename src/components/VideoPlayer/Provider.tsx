@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import { getStorage, setStorage } from "../../utils";
 
 const KEY_LOCALSTORAGE = "dbActionsReact";
@@ -7,14 +7,14 @@ const Context = React.createContext({});
 
 interface IState {
   autoPlaylist: boolean;
-  playlistItem: IPlaylistItem | null;
+  playlistItem: IVideoClip | null;
   repeat: boolean;
   theaterMode: boolean; // theater Mode TODO:
 }
 
 export interface IVideoPlayerProvider extends IState {
   setAutoPlay: (autoPlay: boolean) => void;
-  setPlaylistItem: (playlistItem: IPlaylistItem) => void;
+  setPlaylistItem: (playlistItem: IVideoClip) => void;
   setRepeat: (repeat: boolean) => void;
   setTheaterMode: (theaterMode: boolean) => void;
 }
@@ -49,7 +49,7 @@ export default class VideoPlayerProvider extends React.Component<any, IState> {
     this.setState({ autoPlaylist }, this.updateStorage);
   };
 
-  public setPlaylistItem = (playlistItem: IPlaylistItem) => {
+  public setPlaylistItem = (playlistItem: IVideoClip) => {
     this.setState({ playlistItem }, this.updateStorage);
   };
 

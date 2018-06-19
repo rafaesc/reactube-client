@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import Item from "./Item";
 import PlaylistProvider, { IPlaylistProvider } from "./Provider";
 import {
@@ -13,15 +13,15 @@ import { isTypeEqual } from "../../utils";
 
 export interface IPropsExternal {
   onClick?: (id: string) => void;
-  playlist?: IPlaylistItem[];
-  videoSelected?: string;
+  playlist?: IVideoClip[];
+  idSelected?: string;
   expand?: boolean;
   children?: any;
 }
 
 export interface IProps extends IPropsExternal, IPlaylistProvider {}
 
-export const PlaylistItem = props => props.children(props.id);
+export const VideoClipContainer = props => props.children(props.id);
 
 export const PlaylistHeader: React.SFC<any> = props => (
   <PlaylistHeadItemStyled>{props.children}</PlaylistHeadItemStyled>
@@ -43,12 +43,12 @@ const Playlist: React.SFC<IProps> = props => {
   const renderItemChildren = (id: string) => {
     return React.Children.toArray(props.children)
       .filter((child: any) => {
-        return isTypeEqual(child, PlaylistItem);
+        return isTypeEqual(child, VideoClipContainer);
       })
       .map((child: any) => React.cloneElement(child, { id }));
   };
 
-  const { playlist = [], onClick, videoSelected, expand } = props;
+  const { playlist = [], onClick, idSelected, expand } = props;
   return (
     <PlaylistWrapper expand={expand}>
       <PlaylistContainer>
@@ -56,7 +56,7 @@ const Playlist: React.SFC<IProps> = props => {
         <PlaylistBodyStyled expand={expand}>
           {playlist.map((item, index) => (
             <Item
-              selected={videoSelected}
+              selected={idSelected}
               index={index}
               key={index}
               expand={expand}

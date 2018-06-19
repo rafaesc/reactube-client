@@ -33,7 +33,7 @@ export default class FragmentControl extends React.Component<IProps, IState> {
   public componentWillMount() {
     const {
       provider: { duration },
-      currentVideo: { startTime, endTime }
+      currentVideoClip: { startTime, endTime }
     } = this.props;
 
     this.updateValue(startTime, endTime, duration);
@@ -42,20 +42,20 @@ export default class FragmentControl extends React.Component<IProps, IState> {
   public componentWillReceiveProps(nextProps: IProps) {
     const {
       provider: { duration },
-      currentVideo: { startTime, endTime }
+      currentVideoClip: { startTime, endTime }
     } = this.props;
 
     // Changed video
     if (
       nextProps.provider.duration &&
-      (nextProps.currentVideo.startTime !== startTime ||
-        nextProps.currentVideo.endTime !== endTime ||
+      (nextProps.currentVideoClip.startTime !== startTime ||
+        nextProps.currentVideoClip.endTime !== endTime ||
         nextProps.provider.duration !== duration)
     ) {
       const provider = nextProps.provider;
       this.updateValue(
-        nextProps.currentVideo.startTime,
-        nextProps.currentVideo.endTime,
+        nextProps.currentVideoClip.startTime,
+        nextProps.currentVideoClip.endTime,
         provider.duration
       );
     }
@@ -82,7 +82,7 @@ export default class FragmentControl extends React.Component<IProps, IState> {
   get range() {
     const {
       provider: { duration, editActive },
-      currentVideo: { startTime, endTime }
+      currentVideoClip: { startTime, endTime }
     } = this.props;
 
     const { changed, value } = this.state;
@@ -109,7 +109,7 @@ export default class FragmentControl extends React.Component<IProps, IState> {
   public handleChangeComplete = ([min, max]: [number, number]) => {
     const {
       provider: { duration, editActive },
-      currentVideo: { startTime, endTime },
+      currentVideoClip: { startTime, endTime },
       editingValues
     } = this.props;
 

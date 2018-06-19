@@ -20,8 +20,8 @@ const Home: React.SFC<IProps> = props => {
       <PageWithSidebarStyled>
         <ContentDinamicStyled>
           <VideoItemListStyled>
-            {props.playlist.map((item, index) => (
-              <VideoItem key={index} {...item} />
+            {props.playlist.map((videoClip, index) => (
+              <VideoItem key={index} {...videoClip} />
             ))}
           </VideoItemListStyled>
         </ContentDinamicStyled>

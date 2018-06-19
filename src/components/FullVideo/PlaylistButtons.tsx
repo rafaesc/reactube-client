@@ -10,15 +10,15 @@ interface IPropsCompound extends IProps {
 }
 
 const CompoundPlaylistButton: React.SFC<IPropsCompound> = props => {
-  const { children, onPlaylistAction } = props;
-  if (onPlaylistAction) {
+  const { children, onClickPlaylistAction } = props;
+  if (onClickPlaylistAction) {
     const handleClick = () => {
       const { value } = props;
-      onPlaylistAction(value);
+      onClickPlaylistAction(value);
     };
 
     return (
-      onPlaylistAction && (
+      onClickPlaylistAction && (
         <PlayerButtonStyled onClick={handleClick}>
           {children}
         </PlayerButtonStyled>

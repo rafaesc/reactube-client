@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import {
   VideoItemStyled,
   VideoItemImage,
@@ -9,7 +9,7 @@ import {
   VideoItemSubTitle
 } from "./styles";
 
-interface IProps extends IPlaylistItem { }
+interface IProps extends IVideoClip { }
 
 const VideoItem: React.SFC<IProps> = props => {
   return (

@@ -13,14 +13,14 @@ import {
   ComingNextBottomStyled,
   ComingNextButtonStyled
 } from "./styles";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import { showSpinnerNextVideo } from "../../utils";
 
 class CommingNext extends React.Component<
   {
-    nextVideo: IPlaylistItem;
-    setAutoPlay?: (autoPlay: boolean) => void;
-    onPlaylistAction: (value: string) => void;
+    nextVideoClip: IVideoClip;
+    onChangeAutoPlay?: (autoPlay: boolean) => void;
+    onClickPlaylistAction: (value: string) => void;
   },
   { count: number }
 > {
@@ -34,7 +34,7 @@ class CommingNext extends React.Component<
       const newCount = this.state.count - 1;
       this.setState({ count: newCount });
       if (newCount === 0) {
-        this.launchNextVideo();
+        this.launchNextVideoClip();
       }
     }, 1000);
   }
@@ -44,31 +44,31 @@ class CommingNext extends React.Component<
     this.setState({ count: 5 });
   }
 
-  public launchNextVideo = () => {
-    if (this.props.onPlaylistAction) {
-      this.props.onPlaylistAction("next");
+  public launchNextVideoClip = () => {
+    if (this.props.onClickPlaylistAction) {
+      this.props.onClickPlaylistAction("next");
     }
     clearInterval(this.time);
   };
 
   public handleStopTime = () => {
-    const { setAutoPlay } = this.props;
-    if (setAutoPlay) {
-      setAutoPlay(false);
+    const { onChangeAutoPlay } = this.props;
+    if (onChangeAutoPlay) {
+      onChangeAutoPlay(false);
     }
   };
 
   public render() {
-    const { nextVideo } = this.props;
+    const { nextVideoClip } = this.props;
 
     return (
       <ComingNextStyled>
-        <ComingNextImageStyled image={nextVideo.image} />
+        <ComingNextImageStyled image={nextVideoClip.image} />
         <ComingNextTopStyled>
           <ComingNextHeaderStyled>Up Next</ComingNextHeaderStyled>
-          <ComingNextTitleStyled>{nextVideo.title}</ComingNextTitleStyled>
+          <ComingNextTitleStyled>{nextVideoClip.title}</ComingNextTitleStyled>
         </ComingNextTopStyled>
-        <ComingNextAutoplayStyled onClick={this.launchNextVideo}>
+        <ComingNextAutoplayStyled onClick={this.launchNextVideoClip}>
           <ComingNextIconStyled>
             <i className="fas fa-step-forward" />
           </ComingNextIconStyled>
@@ -104,23 +104,23 @@ interface IProps extends IPropsFromFullVideo {
 const WrapperComingNext: React.SFC<IProps> = props => {
   const {
     autoPlaylist,
-    currentVideo: { endTime },
-    nextVideo,
-    setAutoPlay,
-    onPlaylistAction,
+    currentVideoClip: { endTime },
+    nextVideoClip,
+    onChangeAutoPlay,
+    onClickPlaylistAction,
     provider: { currentTime, duration }
   } = props;
 
   if (
     showSpinnerNextVideo(currentTime, endTime, duration, autoPlaylist) &&
-    onPlaylistAction &&
-    nextVideo
+    onClickPlaylistAction &&
+    nextVideoClip
   ) {
     return (
       <CommingNext
-        setAutoPlay={setAutoPlay}
-        nextVideo={nextVideo}
-        onPlaylistAction={onPlaylistAction}
+        onChangeAutoPlay={onChangeAutoPlay}
+        nextVideoClip={nextVideoClip}
+        onClickPlaylistAction={onClickPlaylistAction}
       />
     );
   }

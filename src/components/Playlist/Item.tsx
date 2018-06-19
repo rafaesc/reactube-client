@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import {
   ItemStyled,
   ItemContainStyled,
@@ -10,7 +10,7 @@ import {
   ItemImageStyled
 } from "./styles";
 
-interface IProps extends IPlaylistItem {
+interface IProps extends IVideoClip {
   index: number;
   selected?: string;
   expand?: boolean;

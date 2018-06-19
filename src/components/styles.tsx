@@ -140,7 +140,7 @@ export const ContentFullStyled = styled(ContentStyled)`
   width: 100%;
   max-width: initial;
   background: white;
-  @media ${device.mobileL} {
+  @media ${device.laptop} {
     padding-top: 0;
   }
 `;

@@ -13,15 +13,15 @@ import {
 } from "../Playlist/styles";
 import { VideoPlayStyled } from "./styles";
 import VideoPlayerProvider, { IVideoPlayerProvider } from "./Provider";
-import { isTypeEqual, findIndexPlaylistForId } from "../../utils";
-import { IPlaylistItem, IPlaylistItemOptional } from "../types";
+import { isTypeEqual, findVideoClipIndexForId } from "../../utils";
+import { IVideoClip, IVideoClipOptional } from "../types";
 
 export interface IPropsExternal {
-  videoSelected: string;
-  playlist: IPlaylistItem[];
-  removePlaylistItem: (id: string) => void;
-  updateSelected: (id: string) => void;
-  updatePlaylistItem: (id: string, playlist: IPlaylistItemOptional) => void;
+  idSelected: string;
+  playlist: IVideoClip[];
+  onRemoveVideoClip: (id: string) => void;
+  onChangeSelected: (id: string) => void;
+  onChangeVideoClip: (id: string, playlist: IVideoClipOptional) => void;
   children?: any;
 }
 
@@ -31,34 +31,34 @@ interface IProps extends IPropsExternal, IVideoPlayerProvider {
 
 const VideoPlayer: React.SFC<IProps> = props => {
   const handleChangeTimeFragment = (startTime, endTime) => {
-    const { updatePlaylistItem, videoSelected } = props;
-    updatePlaylistItem(videoSelected, { startTime, endTime });
+    const { onChangeVideoClip, idSelected } = props;
+    onChangeVideoClip(idSelected, { startTime, endTime });
   };
 
   const handleClickPlaylistItem = (id: string) => {
-    const { updateSelected } = props;
+    const { onChangeSelected } = props;
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    updateSelected(id);
+    onChangeSelected(id);
   };
 
   const handlePlaylistAction = (value: "next" | "back") => {
-    const { playlist, videoSelected, updateSelected, repeat } = props;
-    let newVideoSelected;
-    const index = findIndexPlaylistForId(playlist, videoSelected);
+    const { playlist, idSelected, onChangeSelected, repeat } = props;
+    let indexSelected;
+    const index = findVideoClipIndexForId(playlist, idSelected);
 
     if (index !== null) {
       if (value === "next") {
-        newVideoSelected = index + 1;
+        indexSelected = index + 1;
       } else {
-        newVideoSelected = index - 1;
+        indexSelected = index - 1;
       }
-      const loadVideo = playlist[newVideoSelected];
+      const loadVideo = playlist[indexSelected];
 
       if (loadVideo) {
-        updateSelected(loadVideo.id);
+        onChangeSelected(loadVideo.id);
       } else if (repeat) {
-        updateSelected(playlist[0].id);
+        onChangeSelected(playlist[0].id);
       }
     }
   };
@@ -89,7 +89,7 @@ const VideoPlayer: React.SFC<IProps> = props => {
   const renderChildren = () => {
     const {
       playlist,
-      videoSelected,
+      idSelected,
       autoPlaylist,
       repeat,
       setAutoPlay
@@ -100,40 +100,40 @@ const VideoPlayer: React.SFC<IProps> = props => {
       if (isTypeEqual(child, Playlist)) {
         const newProps: IPlaylistProps = {
           children: getPlaylistChildren(child),
+          idSelected,
           onClick: handleClickPlaylistItem,
-          playlist,
-          videoSelected
+          playlist
         };
         return React.cloneElement(child, newProps);
       }
 
       // Take all FullVideo components
       if (isTypeEqual(child, FullVideo)) {
-        const index = findIndexPlaylistForId(playlist, videoSelected);
-        let nextVideo;
-        let itemSelected;
+        const index = findVideoClipIndexForId(playlist, idSelected);
+        let nextVideoClip;
+        let videoClipSelected;
         if (index === null) {
-          itemSelected = {
+          videoClipSelected = {
             id: ""
           };
         } else {
-          nextVideo = playlist[index + 1];
+          nextVideoClip = playlist[index + 1];
 
-          if (repeat && !nextVideo) {
-            nextVideo = playlist[0];
+          if (repeat && !nextVideoClip) {
+            nextVideoClip = playlist[0];
           }
 
-          itemSelected = playlist[index];
+          videoClipSelected = playlist[index];
         }
 
         const newProps: IFullVideoProps = {
-          autoPlay: true,
-          autoPlaylist: nextVideo ? autoPlaylist : false,
-          currentVideo: itemSelected,
-          nextVideo,
-          onPlaylistAction: handlePlaylistAction,
-          setAutoPlay,
-          updatedTimeFragment: handleChangeTimeFragment
+          autoPlay: false,
+          autoPlaylist: nextVideoClip ? autoPlaylist : false,
+          currentVideoClip: videoClipSelected,
+          nextVideoClip,
+          onChangeAutoPlay: setAutoPlay,
+          onChangeTimeFragment: handleChangeTimeFragment,
+          onClickPlaylistAction: handlePlaylistAction
         };
 
         return React.cloneElement(child, newProps);

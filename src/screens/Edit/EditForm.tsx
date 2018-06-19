@@ -6,7 +6,7 @@
 import * as React from "react";
 import {
   InputLabel,
-  IPlaylistItem,
+  IVideoClip,
   ButtonPrimaryStyled,
   FormStyled
 } from "../../components";
@@ -24,8 +24,8 @@ import { IForm } from "./type";
 
 interface IProps {
   history: History;
-  onSuccess: (playlist: IPlaylistItem) => void;
-  playlist?: IPlaylistItem;
+  onSuccess: (playlist: IVideoClip) => void;
+  playlist?: IVideoClip;
   onSubmit?: () => void;
 }
 

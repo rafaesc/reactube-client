@@ -1,4 +1,4 @@
-import { IPlaylistItem } from "../../components";
+import { IVideoClip } from "../../components";
 import { IFormSuccess } from "./type";
 
 export const validRequired = (value: string = ""): boolean => {
@@ -22,7 +22,7 @@ export const validVideoURL = (url: string = ""): boolean => {
   return url.match(/\.mp4/) != null;
 };
 
-export const parseFormtoPlaylist = (value: IFormSuccess): IPlaylistItem => {
+export const parseFormtoPlaylist = (value: IFormSuccess): IVideoClip => {
   return {
     endTime: getTime(value.endTime),
     id: String(Date.now()),

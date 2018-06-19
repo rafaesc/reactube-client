@@ -1,10 +1,18 @@
 {
-  "eslint.autoFixOnSave": true,
   "prettier.eslintIntegration": true,
-  "javascript.validate.enable": false,
+  "files.exclude": {
+    ".git": true,
+    ".build": true,
+    "**/.DS_Store": true,
+    "build/**/*.js": {
+      "when": "$(basename).ts"
+    }
+  },
+	"tslint.enable": true,
   "editor.rulers": [80],
   "html.format.endWithNewline": true,
   "files.trimTrailingWhitespace": true,
   "editor.trimAutoWhitespace": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": ".\\node_modules\\typescript\\lib",
+  "tslint.autoFixOnSave": true
 }

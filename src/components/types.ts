@@ -1,4 +1,4 @@
-export interface IPlaylistItem {
+export interface IVideoClip {
   id: string;
   title: string;
   endTime: number;
@@ -8,7 +8,7 @@ export interface IPlaylistItem {
   tags: string[];
 }
 
-export interface IPlaylistItemOptional {
+export interface IVideoClipOptional {
   id?: string;
   title?: string;
   endTime?: number;

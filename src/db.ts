@@ -1,4 +1,4 @@
-import { IPlaylistItem } from "./components";
+import { IVideoClip } from "./components";
 // tslint:disable:object-literal-sort-keys
 
 interface IData {
@@ -155,7 +155,7 @@ const getFolderFromUrl = (url: string) => {
   );
 };
 
-const parseListVideos = (data: IData, index: number): IPlaylistItem => {
+const convertToVideoClip = (data: IData, index: number): IVideoClip => {
   const { sources, title, thumb, duration } = data;
   const folderUrl = getFolderFromUrl(sources);
 
@@ -176,4 +176,4 @@ const parseListVideos = (data: IData, index: number): IPlaylistItem => {
   };
 };
 
-export default database.map(parseListVideos);
+export default database.map(convertToVideoClip);

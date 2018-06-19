@@ -4,7 +4,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import ComingNext from "./ComingNext";
 import Shortcut from "./Shortcut";
 import Video from "./Video";
-import { IPlaylistItem } from "../types";
+import { IVideoClip } from "../types";
 import FullVideoProvider, { IFullVideoProvider } from "./Provider";
 
 import { FullVideoStyled, TitleStyled } from "./styles";
@@ -13,11 +13,11 @@ import BigPlayButton from "./BigPlayButton";
 export interface IExternalProps {
   autoPlay?: boolean;
   autoPlaylist?: boolean;
-  currentVideo: IPlaylistItem;
-  nextVideo?: IPlaylistItem;
-  updatedTimeFragment: (startTime: number, endTime: number) => void;
-  setAutoPlay?: (autoPlaylist: boolean) => void;
-  onPlaylistAction?: (value: "next" | "back") => void;
+  currentVideoClip: IVideoClip;
+  nextVideoClip?: IVideoClip;
+  onChangeTimeFragment: (startTime: number, endTime: number) => void;
+  onChangeAutoPlay?: (autoPlaylist: boolean) => void;
+  onClickPlaylistAction?: (value: "next" | "back") => void;
   children?: any;
 }
 
@@ -51,7 +51,7 @@ class FullVideo extends React.Component<IProps> {
   public render() {
     const provider = this.props.provider;
     const { fullscreen, userActivity, paused } = provider;
-    const { src, id, title } = this.props.currentVideo;
+    const { src, id, title } = this.props.currentVideoClip;
 
     const thereIsId = id !== "";
 

@@ -1,4 +1,4 @@
-import { IPlaylistItem } from "../components/types";
+import { IVideoClip } from "../components/types";
 
 export const showSpinnerNextVideo = (
   currentTime,
@@ -10,8 +10,8 @@ export const showSpinnerNextVideo = (
   return currentTime >= fixEndTime && duration !== 0 && autoPlaylist;
 };
 
-export const findIndexPlaylistForId = (
-  playlist: IPlaylistItem[],
+export const findVideoClipIndexForId = (
+  playlist: IVideoClip[],
   id: string
 ): any => {
   for (let i = 0; i < playlist.length; i++) {
@@ -22,8 +22,8 @@ export const findIndexPlaylistForId = (
   return null;
 };
 
-export const findPlaylistItemForId = (playlist, id): IPlaylistItem => {
-  return playlist[findIndexPlaylistForId(playlist, id)];
+export const findVideoClipForId = (playlist: IVideoClip[], id): IVideoClip => {
+  return playlist[findVideoClipIndexForId(playlist, id)];
 };
 
 export const isTypeEqual = (component1, component2) => {

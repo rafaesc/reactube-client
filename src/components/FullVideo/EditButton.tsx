@@ -19,11 +19,11 @@ const EditButton: React.SFC<IProps> = props => {
   const handleSave = () => {
     const {
       editing,
-      updatedTimeFragment,
+      onChangeTimeFragment,
       provider: { editMin, editMax }
     } = props;
 
-    updatedTimeFragment(editMin, editMax);
+    onChangeTimeFragment(editMin, editMax);
     editing(false);
   };
 

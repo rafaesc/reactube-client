@@ -4,7 +4,7 @@ import {
   FullVideo,
   VideoPlayer,
   Playlist,
-  PlaylistItem,
+  VideoClipContainer,
   ContentFullStyled,
   PageStyled
 } from "../../components";
@@ -24,42 +24,42 @@ interface IProps
 const FullPlayer: React.SFC<IProps> = props => {
   const routerParams = props.match.params;
 
-  const handleUpdateSelected = (videoSelected: string) => {
-    props.history.push("/video/" + videoSelected);
+  const handleUpdateSelected = (idSelected: string) => {
+    props.history.push("/video/" + idSelected);
   };
 
-  const handleEdit = (videoSelected: string) => {
-    props.history.push("/edit/" + videoSelected);
+  const handleEdit = (idSelected: string) => {
+    props.history.push("/edit/" + idSelected);
   };
 
   return (
     <PageStyled>
       <ContentFullStyled>
         <VideoPlayer
-          removePlaylistItem={props.removePlaylistItem}
-          videoSelected={routerParams.id}
-          updateSelected={handleUpdateSelected}
-          updatePlaylistItem={props.updatePlaylistItem}
+          onRemoveVideoClip={props.removePlaylistItem}
+          idSelected={routerParams.id}
+          onChangeSelected={handleUpdateSelected}
+          onChangeVideoClip={props.setVideoClip}
           playlist={props.playlist}
         >
           <FullVideo />
           <Playlist>
-            <PlaylistItem>
-              {idItem => (
+            <VideoClipContainer>
+              {idVideoClip => (
                 <React.Fragment>
-                  {routerParams.id !== idItem && (
+                  {routerParams.id !== idVideoClip && (
                     <button
-                      onClick={props.removePlaylistItem.bind(null, idItem)}
+                      onClick={props.removePlaylistItem.bind(null, idVideoClip)}
                     >
                       <i className="fas fa-trash-alt" />
                     </button>
                   )}
-                  <button onClick={handleEdit.bind(null, idItem)}>
+                  <button onClick={handleEdit.bind(null, idVideoClip)}>
                     <i className="fas fa-edit" />
                   </button>
                 </React.Fragment>
               )}
-            </PlaylistItem>
+            </VideoClipContainer>
           </Playlist>
         </VideoPlayer>
       </ContentFullStyled>
