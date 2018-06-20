@@ -6,10 +6,12 @@ import {
   Playlist,
   VideoClipContainer,
   ContentFullStyled,
-  PageStyled
+  PageStyled,
+  LayoutFullVideo
 } from "../../components";
 
 import AppProvider, { IAppProvider } from "../../AppProvider";
+import { isMobile } from "../../utils";
 
 interface IRouterProps {
   id: string;
@@ -21,15 +23,21 @@ class FullPlayer extends React.Component<IProps> {
   public componentWillMount() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    this.props.setInFullPlayer(true);
     this.props.setIdVideo(this.props.match.params.id);
   }
 
   public componentWillReceiveProps(nextProps: IProps) {
     const idVideo = this.props.match.params.id;
     const newIdVideo = nextProps.match.params.id;
+
     if (idVideo !== newIdVideo) {
-      this.props.setIdVideo(this.props.match.params.id);
+      this.props.setIdVideo(newIdVideo);
     }
+  }
+
+  public componentWillUnmount() {
+    this.props.setInFullPlayer(false);
   }
 
   public handleEdit = (idSelected: string) => {
@@ -47,13 +55,19 @@ class FullPlayer extends React.Component<IProps> {
       <PageStyled>
         <ContentFullStyled>
           <VideoPlayer
+            random={this.props.random}
+            onChangeRandom={this.props.setRandom}
             onRemoveVideoClip={this.props.removePlaylistItem}
             idSelected={routerParams.id}
+            autoPlaylist={this.props.autoPlaylist}
+            repeat={this.props.repeat}
+            onChangeAutoPlaylist={this.props.setAutoPlaylist}
+            onChangeRepeat={this.props.setRepeat}
             onChangeSelected={this.handleUpdateSelected}
             onChangeVideoClip={this.props.setVideoClip}
             playlist={this.props.playlist}
           >
-            <FullVideo />
+            {isMobile ? <LayoutFullVideo /> : <FullVideo />}
             <Playlist>
               <VideoClipContainer>
                 {idVideoClip => (

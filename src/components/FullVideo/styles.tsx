@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StyledFunction } from "styled-components";
 import styled, { theme, device } from "../../theme";
+import { LayoutFullVideo } from "../styles";
 
 interface IDivStyled {
   [x: string]: any;
@@ -10,18 +11,11 @@ const div: StyledFunction<IDivStyled & React.HTMLProps<HTMLInputElement>> =
 const button: StyledFunction<IDivStyled & React.HTMLProps<HTMLInputElement>> =
   styled.button;
 
-export const VideoWrapperStyled = div`
-  display: block;
-  box-sizing: border-box;
-  color: #fff;
-  background-color: #000;
-  position: relative;
-  font-size: 10px;
-  line-height: 1;
-  font-family: serif;
-  width: 100%;
-  max-width: 100%;
-  height: 0;
+const layoutFullVideo: StyledFunction<
+  IDivStyled & React.HTMLProps<HTMLInputElement>
+> = styled(LayoutFullVideo);
+
+export const VideoWrapperStyled = layoutFullVideo`
   padding-top: ${({ fullscreen }) => (fullscreen ? "0" : "56.25%")};
   height: ${({ fullscreen }) => (fullscreen ? "100%" : "auto")};
   opacity: ${({ show }) => (show ? "1" : "0")};
@@ -210,6 +204,7 @@ height: 100%;
 position: absolute;
 background-size: cover;
 background-image: url(${({ image }) => image});
+background-position: center;
 opacity: .4;
 `;
 
@@ -352,22 +347,21 @@ export const ProgressControlStyled = div`
   width: 100%;
   display: ${props => (props.show ? "none" : "block")}
 `;
-
 export const FullVideoStyled = div`
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  max-width: ${({ fullscreen }) => (fullscreen ? "100%" : "900px")};
-  height: ${({ fullscreen }) => (fullscreen ? "100%" : "auto")};
-  background: black;
-  font-size: 11px;
-  margin: 0;
+position: relative;
+display: inline-block;
+width: 100%;
+max-width: ${({ fullscreen }) => (fullscreen ? "100%" : "900px")};
+height: ${({ fullscreen }) => (fullscreen ? "100%" : "auto")};
+background: black;
+font-size: 11px;
+margin: 0;
 
-  @media ${device.laptopS} {
-    margin: 0 auto;
-  }
+@media ${device.laptopS} {
+  margin: 0 auto;
+}
 
-  ${TitleStyled}, ${ControlBarStyled} {
-    opacity: ${({ showControls }) => (showControls ? "1" : "0")}
-  }
+${TitleStyled}, ${ControlBarStyled} {
+  opacity: ${({ showControls }) => (showControls ? "1" : "0")}
+}
 `;

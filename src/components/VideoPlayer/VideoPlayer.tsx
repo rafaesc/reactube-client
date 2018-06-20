@@ -12,20 +12,30 @@ import {
   PlaylistSwitchStyled
 } from "../Playlist/styles";
 import { VideoPlayStyled } from "./styles";
-import VideoPlayerProvider, { IVideoPlayerProvider } from "./Provider";
-import { isTypeEqual, findVideoClipIndexForId } from "../../utils";
+import {
+  isTypeEqual,
+  findVideoClipIndexForId,
+  getPlaylistActions
+} from "../../utils";
 import { IVideoClip, IVideoClipOptional } from "../types";
+import { LayoutFullVideo } from "../styles";
 
 export interface IPropsExternal {
   idSelected: string;
   playlist: IVideoClip[];
+  repeat: boolean;
+  random: boolean;
+  autoPlaylist: boolean;
+  onChangeRandom: (random: boolean) => void;
   onRemoveVideoClip: (id: string) => void;
+  onChangeRepeat: (repeat: boolean) => void;
+  onChangeAutoPlaylist: (autoPlay: boolean) => void;
   onChangeSelected: (id: string) => void;
   onChangeVideoClip: (id: string, playlist: IVideoClipOptional) => void;
   children?: any;
 }
 
-interface IProps extends IPropsExternal, IVideoPlayerProvider {
+interface IProps extends IPropsExternal {
   children?: React.ReactNode;
 }
 
@@ -42,43 +52,41 @@ const VideoPlayer: React.SFC<IProps> = props => {
     onChangeSelected(id);
   };
 
-  const handlePlaylistAction = (value: "next" | "back") => {
-    const { playlist, idSelected, onChangeSelected, repeat } = props;
-    let indexSelected;
-    const index = findVideoClipIndexForId(playlist, idSelected);
-
-    if (index !== null) {
-      if (value === "next") {
-        indexSelected = index + 1;
-      } else {
-        indexSelected = index - 1;
-      }
-      const loadVideo = playlist[indexSelected];
-
-      if (loadVideo) {
-        onChangeSelected(loadVideo.id);
-      } else if (repeat) {
-        onChangeSelected(playlist[0].id);
-      }
-    }
+  const handlePlaylistAction = (videoClip: IVideoClip) => {
+    const { onChangeSelected } = props;
+    onChangeSelected(videoClip.id);
   };
 
   const getPlaylistChildren = child => {
-    const { setAutoPlay, repeat, setRepeat, autoPlaylist } = props;
+    const {
+      onChangeAutoPlaylist,
+      repeat,
+      onChangeRepeat,
+      autoPlaylist,
+      random,
+      onChangeRandom
+    } = props;
     const children = React.Children.toArray(child.props.children);
 
     children.unshift(
       <PlaylistHeader>
         <PlaylistSwitchStyled>
-          <Switch checked={autoPlaylist} onChange={setAutoPlay} />
+          <Switch checked={autoPlaylist} onChange={onChangeAutoPlaylist} />
           <span> Autoplay</span>
         </PlaylistSwitchStyled>
         <PlaylistHeadButtonStyled
           active={repeat}
-          onClick={setRepeat.bind(null, !repeat)}
+          onClick={onChangeRepeat.bind(null, !repeat)}
         >
           <i className="fas fa-redo-alt" />
           <span> Loop</span>
+        </PlaylistHeadButtonStyled>
+        <PlaylistHeadButtonStyled
+          active={random}
+          onClick={onChangeRandom.bind(null, !random)}
+        >
+          <i className="fas fa-random" />
+          <span> Random</span>
         </PlaylistHeadButtonStyled>
       </PlaylistHeader>
     );
@@ -87,7 +95,14 @@ const VideoPlayer: React.SFC<IProps> = props => {
   };
 
   const renderChildren = () => {
-    const { playlist, idSelected, autoPlaylist, repeat, setAutoPlay } = props;
+    const {
+      playlist,
+      idSelected,
+      autoPlaylist,
+      repeat,
+      random,
+      onChangeAutoPlaylist
+    } = props;
 
     return React.Children.toArray(props.children).map((child: any) => {
       // Take all Playlist components
@@ -102,26 +117,25 @@ const VideoPlayer: React.SFC<IProps> = props => {
       }
 
       // Take all FullVideo components
-      if (isTypeEqual(child, FullVideo)) {
+      if (
+        isTypeEqual(child, FullVideo) ||
+        isTypeEqual(child, LayoutFullVideo)
+      ) {
         const index = findVideoClipIndexForId(playlist, idSelected);
-        let nextVideoClip;
-        let videoClipSelected;
-        if (index !== null) {
-          nextVideoClip = playlist[index + 1];
 
-          if (repeat && !nextVideoClip) {
-            nextVideoClip = playlist[0];
-          }
-
-          videoClipSelected = playlist[index];
-        }
+        const {
+          nextVideoClip,
+          backVideoClip,
+          currentVideoClip
+        } = getPlaylistActions(index, playlist, repeat, random);
 
         const newProps: IFullVideoProps = {
           autoPlay: true,
           autoPlaylist: nextVideoClip ? autoPlaylist : false,
-          currentVideoClip: videoClipSelected,
+          backVideoClip,
+          currentVideoClip,
           nextVideoClip,
-          onChangeAutoPlay: setAutoPlay,
+          onChangeAutoPlaylist,
           onChangeTimeFragment: handleChangeTimeFragment,
           onClickPlaylistAction: handlePlaylistAction
         };
@@ -135,10 +149,4 @@ const VideoPlayer: React.SFC<IProps> = props => {
   return <VideoPlayStyled>{renderChildren()}</VideoPlayStyled>;
 };
 
-export default (props: IPropsExternal) => (
-  <VideoPlayerProvider>
-    <VideoPlayerProvider.Consumer>
-      {(value: IVideoPlayerProvider) => <VideoPlayer {...props} {...value} />}
-    </VideoPlayerProvider.Consumer>
-  </VideoPlayerProvider>
-);
+export default VideoPlayer;

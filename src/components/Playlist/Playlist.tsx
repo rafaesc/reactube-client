@@ -1,7 +1,6 @@
 import * as React from "react";
 import { IVideoClip } from "../types";
 import Item from "./Item";
-import PlaylistProvider, { IPlaylistProvider } from "./Provider";
 import {
   PlaylistHeadStyled,
   PlaylistBodyStyled,
@@ -19,7 +18,7 @@ export interface IPropsExternal {
   children?: any;
 }
 
-export interface IProps extends IPropsExternal, IPlaylistProvider {}
+export interface IProps extends IPropsExternal {}
 
 export const VideoClipContainer = props => props.children(props.id);
 
@@ -72,10 +71,4 @@ const Playlist: React.SFC<IProps> = props => {
   );
 };
 
-export default (props: IPropsExternal) => (
-  <PlaylistProvider>
-    <PlaylistProvider.Consumer>
-      {(value: IPlaylistProvider) => <Playlist {...props} {...value} />}
-    </PlaylistProvider.Consumer>
-  </PlaylistProvider>
-);
+export default Playlist;

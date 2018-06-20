@@ -23,7 +23,9 @@ const EditButton: React.SFC<IProps> = props => {
       provider: { editMin, editMax }
     } = props;
 
-    onChangeTimeFragment(editMin, editMax);
+    if (onChangeTimeFragment) {
+      onChangeTimeFragment(editMin, editMax);
+    }
     editing(false);
   };
 

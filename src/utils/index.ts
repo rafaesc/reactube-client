@@ -1,5 +1,10 @@
 import { IVideoClip } from "../components/types";
 
+export const isiOS =
+  !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+export const isMobile = window.innerWidth <= 768;
+
 export const showSpinnerNextVideo = (
   currentTime,
   endTime,
@@ -125,4 +130,48 @@ export function convertToTime(time, duration = 0) {
 
 export const formatTooltipRange = (duration: number) => time => {
   return formatTime(convertToTime(time, duration));
+};
+
+export const getRandomArray = (arr: any[]) => {
+  return Math.floor(Math.random() * arr.length);
+};
+
+export const getPlaylistActions = (
+  index: number,
+  playlist: IVideoClip[],
+  repeat: boolean,
+  random: boolean
+): {
+  currentVideoClip?: IVideoClip;
+  backVideoClip?: IVideoClip;
+  nextVideoClip?: IVideoClip;
+} => {
+  let nextVideoClip;
+  let backVideoClip;
+  let currentVideoClip;
+
+  if (index !== null) {
+    if (random) {
+      const newPlaylist = playlist.filter(
+        (videoClip, indexVideo) => index !== indexVideo
+      );
+
+      nextVideoClip = newPlaylist[getRandomArray(newPlaylist)];
+    } else {
+      nextVideoClip = playlist[index + 1];
+      backVideoClip = playlist[index - 1];
+
+      if (repeat && !nextVideoClip) {
+        nextVideoClip = playlist[0];
+      }
+    }
+
+    currentVideoClip = playlist[index];
+    return {
+      backVideoClip,
+      currentVideoClip,
+      nextVideoClip
+    };
+  }
+  return {};
 };

@@ -27,6 +27,21 @@ export const SidebarStyled = div`
   }
 `;
 
+export const LayoutFullVideo = div`
+  display: block;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #000;
+  position: relative;
+  font-size: 10px;
+  line-height: 1;
+  font-family: serif;
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+`
+
 export const PageWithSidebarStyled = styled(PageStyled)`
   background: #fafafa;
   margin-left: 170px;

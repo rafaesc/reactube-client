@@ -9,15 +9,18 @@ import FullVideoProvider, { IFullVideoProvider } from "./Provider";
 
 import { FullVideoStyled, TitleStyled } from "./styles";
 import BigPlayButton from "./BigPlayButton";
+import { isiOS } from "../../utils";
 
 export interface IExternalProps {
   autoPlay?: boolean;
+  showControls?: boolean;
   autoPlaylist?: boolean;
   currentVideoClip?: IVideoClip;
+  backVideoClip?: IVideoClip;
   nextVideoClip?: IVideoClip;
-  onChangeTimeFragment: (startTime: number, endTime: number) => void;
-  onChangeAutoPlay?: (autoPlaylist: boolean) => void;
-  onClickPlaylistAction?: (value: "next" | "back") => void;
+  onChangeTimeFragment?: (startTime: number, endTime: number) => void;
+  onChangeAutoPlaylist?: (autoPlaylist: boolean) => void;
+  onClickPlaylistAction?: (videoClip: IVideoClip) => void;
   children?: any;
 }
 
@@ -27,6 +30,7 @@ export interface IProps extends IExternalProps, IFullVideoProvider {
 
 interface IDefaultProps {
   currentVideoClip: IVideoClipOptional;
+  showControls: boolean;
 }
 
 export interface IPropsChildrens extends IProps {
@@ -39,7 +43,8 @@ class FullVideo extends React.Component<IProps> {
       id: "",
       src: "",
       startTime: 0
-    }
+    },
+    showControls: true
   };
 
   public video: Video;
@@ -67,7 +72,10 @@ class FullVideo extends React.Component<IProps> {
     const { fullscreen, userActivity, paused } = provider;
     const { src, id, title } = this.props.currentVideoClip;
 
-    const thereIsId = id !== "";
+    const existsID = id !== "";
+
+    // iOS can not show controls
+    const showControls = (isiOS ? false : this.props.showControls) && existsID;
 
     const propsWithoutChildren: IProps = {
       ...this.props,
@@ -90,7 +98,7 @@ class FullVideo extends React.Component<IProps> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        {title && <TitleStyled>{title}</TitleStyled>}
+        {showControls && <TitleStyled>{title}</TitleStyled>}
         <Video
           ref={(c: any) => {
             this.video = c;
@@ -99,10 +107,10 @@ class FullVideo extends React.Component<IProps> {
         >
           <source src={src + "?id=" + id} />
         </Video>
-        <BigPlayButton {...propsActionChildren} />
+        {showControls && <BigPlayButton {...propsActionChildren} />}
         <ComingNext {...propsActionChildren} />
-        {thereIsId && <LoadingSpinner {...propsActionChildren} />}
-        {thereIsId && <ControlBar {...propsActionChildren} />}
+        {showControls && <LoadingSpinner {...propsActionChildren} />}
+        {showControls && <ControlBar {...propsActionChildren} />}
         <Shortcut {...propsActionChildren} />
       </FullVideoStyled>
     );

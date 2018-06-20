@@ -22,7 +22,7 @@ class CommingNext extends React.Component<
   {
     nextVideoClip: IVideoClip;
     onChangeAutoPlay?: (autoPlay: boolean) => void;
-    onClickPlaylistAction: (value: string) => void;
+    onClickPlaylistAction: (videoClip: IVideoClip) => void;
   },
   { count: number }
 > {
@@ -48,7 +48,7 @@ class CommingNext extends React.Component<
 
   public launchNextVideoClip = () => {
     if (this.props.onClickPlaylistAction) {
-      this.props.onClickPlaylistAction("next");
+      this.props.onClickPlaylistAction(this.props.nextVideoClip);
     }
     clearInterval(this.time);
   };
@@ -108,7 +108,8 @@ const WrapperComingNext: React.SFC<IProps> = props => {
     autoPlaylist,
     currentVideoClip: { endTime },
     nextVideoClip,
-    onChangeAutoPlay,
+
+    onChangeAutoPlaylist,
     onClickPlaylistAction,
     provider: { currentTime, duration }
   } = props;
@@ -120,7 +121,7 @@ const WrapperComingNext: React.SFC<IProps> = props => {
   ) {
     return (
       <CommingNext
-        onChangeAutoPlay={onChangeAutoPlay}
+        onChangeAutoPlay={onChangeAutoPlaylist}
         nextVideoClip={nextVideoClip}
         onClickPlaylistAction={onClickPlaylistAction}
       />

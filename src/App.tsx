@@ -7,13 +7,14 @@ import Home from "./screens/Home/Home";
 import FullPlayer from "./screens/FullPlayer/FullPlayer";
 import Search from "./screens/Search/Search";
 import Edit from "./screens/Edit/Edit";
+import { isMobile } from "./utils";
 
 export default () => {
   return (
     <Router>
       <AppProvider>
         <Navbar />
-        <MobileVideo />
+        {isMobile && <MobileVideo />}
         <Route exact={true} path="/" component={Home} />
         <Route exact={true} path="/video/:id" component={FullPlayer} />
         <Route exact={true} path="/search/:value" component={Search} />

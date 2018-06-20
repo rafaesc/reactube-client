@@ -7,17 +7,18 @@ const Context = React.createContext({});
 
 interface IState {
   autoPlaylist: boolean;
-  playlistItem: IVideoClip | null;
   repeat: boolean;
   theaterMode: boolean; // theater Mode TODO:
 }
 
 export interface IVideoPlayerProvider extends IState {
   setAutoPlay: (autoPlay: boolean) => void;
-  setPlaylistItem: (playlistItem: IVideoClip) => void;
   setRepeat: (repeat: boolean) => void;
   setTheaterMode: (theaterMode: boolean) => void;
 }
+
+
+// TODO: Migrate to App Provider
 
 export default class VideoPlayerProvider extends React.Component<any, IState> {
   public static Consumer = Context.Consumer;
@@ -32,7 +33,6 @@ export default class VideoPlayerProvider extends React.Component<any, IState> {
     } else {
       state = {
         autoPlaylist: true,
-        playlistItem: null,
         repeat: false,
         theaterMode: false
       };
@@ -49,10 +49,6 @@ export default class VideoPlayerProvider extends React.Component<any, IState> {
     this.setState({ autoPlaylist }, this.updateStorage);
   };
 
-  public setPlaylistItem = (playlistItem: IVideoClip) => {
-    this.setState({ playlistItem }, this.updateStorage);
-  };
-
   public setTheaterMode = (theaterMode: boolean) => {
     this.setState({ theaterMode }, this.updateStorage);
   };
@@ -61,7 +57,6 @@ export default class VideoPlayerProvider extends React.Component<any, IState> {
     const value: IVideoPlayerProvider = {
       ...this.state,
       setAutoPlay: this.setAutoPlay,
-      setPlaylistItem: this.setPlaylistItem,
       setRepeat: this.setRepeat,
       setTheaterMode: this.setTheaterMode
     };

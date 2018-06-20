@@ -21,5 +21,6 @@ export {
   SidebarStyled,
   ContentDinamicStyled,
   PageWithSidebarStyled,
-  ContentFullStyled
+  ContentFullStyled,
+  LayoutFullVideo,
 } from "./styles";
