@@ -74,8 +74,7 @@ class FullVideo extends React.Component<IProps> {
 
     const existsID = id !== "";
 
-    // iOS can not show controls
-    const showControls = (isiOS ? false : this.props.showControls) && existsID;
+    const showControls = this.props.showControls && existsID;
 
     const propsWithoutChildren: IProps = {
       ...this.props,

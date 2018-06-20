@@ -18,6 +18,13 @@ a {
   min-height: 100%;
 }
 
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-panel-container,
+video::-webkit-media-controls-start-playback-button {
+    display:none !important;
+    -webkit-appearance: none;
+}
+
 canvas,
 caption,
 center,

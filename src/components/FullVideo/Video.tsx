@@ -223,6 +223,7 @@ export default class Video extends React.Component<IProps> {
           }}
           autoPlay={autoPlay}
           src={src}
+          playsinline={true}
           preload="auto"
           onLoadStart={this.handleLoadStart}
           onWaiting={this.handleWaiting}
