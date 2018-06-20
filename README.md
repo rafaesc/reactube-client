@@ -17,17 +17,22 @@ ___
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/fullplayer2.gif?raw=true)
 ___
 
-Homepage
+:tv: Responsive
+
+![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/mobile.gif?raw=true)
+___
+
+:house: Homepage
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/home.png?raw=true)
 ___
 
-Video preview
+:tv: Video preview
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/video-preview.png?raw=true)
 ___
 
-Edit video
+:pencil2: Edit video
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/edit.png?raw=true)
 
