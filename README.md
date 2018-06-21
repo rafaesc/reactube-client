@@ -1,25 +1,57 @@
-<div style="text-align:center"><img src="./screenshots/reactube.svg" alt="drawing" width="450px"/></div>
-<br>
+<p align="center">
+  <a href="https://github.com/rafaesc/reactube-client/">
+    <img src="./screenshots/reactube.svg" alt="drawing" width="450px"/>
+  </a>
+</p><div style="text-align:center"></div>
+<!-- Name -->
+<h1 align="center">
+  with :rocket:<span style="font-variant-caps: petite-caps;font-size: 30px;font-weight: 400;"> Typescript </span>:rocket:
+</h1>
 
 **Reactube-client** is a simple web responsive based on video playlist written in React and Typescript.
+Reactube-client is an open source project relying on [React context](https://reactjs.org/docs/context.html) an useful feature of React that it is great for passing down data to deeply nested components. In this project, I tried to show some features of react/react components, react context with Typescript.
 
-[Live demo](http://rafaelescala.com/reactube/)
+# [LIVE DEMO](http://rafaelescala.com/reactube/)
+
+![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/fullplayer1.gif?raw=true)
+
+## Main Features:
+
+* Video player customized
+* Playlist
+* Preview videos
+* Responsive
+* It's possible crop videos
+* Support with localstorage
+
+## Contain:
+
+- [x] React
+- [x] Typescript
+- [x] React Context (not Redux)
+- [x] Styled components
+- [x] React Router
+
+## Build Setup
+
+```` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:3000
+npm run start
+````
 
 ## Screencast:
 
-:tv: Video player like Youtube
+:tv: Responsive
 
-![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/fullplayer1.gif?raw=true)
+![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/mobile.gif?raw=true)
 ___
 
 :scissors: Crop videos
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/fullplayer2.gif?raw=true)
-___
-
-:tv: Responsive
-
-![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/mobile.gif?raw=true)
 ___
 
 :house: Homepage
@@ -36,19 +68,22 @@ ___
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/edit.png?raw=true)
 
+## Contributing :heart:
 
-## Build Setup
+[Reactube-client](http://rafaelescala.com/reactube/) has been made by love:heart:.
+I'd greatly appreciate any contribution to improve this project. Feel free to sent a PR.
 
-````
-# install dependencies
-npm install
+## Acknowledgments
 
-# serve with hot reload at localhost:3000
-npm run start
-````
+* React
+* JavaScript
+* TypeScript
 
 ## Author and license
 
 MIT License
 
 Copyright (c) 2018-present, [Rafael Escala](https://github.com/rafaesc)
+
+
+
