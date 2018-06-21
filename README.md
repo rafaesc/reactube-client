@@ -8,7 +8,6 @@
   with :rocket:<span style="font-variant-caps: petite-caps;font-size: 30px;font-weight: 400;"> Typescript </span>:rocket:
 </h1>
 
-**Reactube-client** is a simple web responsive based on video playlist written in React and Typescript.
 Reactube-client is an open source project relying on [React context](https://reactjs.org/docs/context.html) an useful feature of React that it is great for passing down data to deeply nested components. In this project, I tried to show some features of react/react components, react context with Typescript.
 
 # [LIVE DEMO](http://rafaelescala.com/reactube/)
