@@ -8,9 +8,9 @@
   with :rocket:<span style="font-variant-caps: petite-caps;font-size: 30px;font-weight: 400;"> Typescript </span>:rocket:
 </h1>
 
-Reactube-client is an open source project relying on [React context](https://reactjs.org/docs/context.html) an useful feature of React that it is great for passing down data to deeply nested components. In this project, I tried to show some features of react/react components, react context with Typescript. **(WIP)**
+Reactube-client is an open source project relying on [React context](https://reactjs.org/docs/context.html) an useful feature of React that it is great for passing down data to deeply nested components. In this project, I tried to show some features of react/react components, react context with Typescript. 
 
-# [LIVE DEMO](http://rafaelescala.com/reactube/)
+# [LIVE DEMO (WIP)](http://rafaelescala.com/reactube/)
 
 ![](https://github.com/rafaesc/reactube-client/blob/master/screenshots/fullplayer1.gif?raw=true)
 
